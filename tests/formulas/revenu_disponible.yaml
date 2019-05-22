@@ -1,4 +1,16 @@
 - period: '2012'
+  name: plusieurs
+  relative_error_margin: 0.01
+  input:
+    individus:
+      p1:
+        pensions_nettes: 1
+      p2:
+        pensions_nettes: 2
+  output:
+    revenu_disponible: 1 + 2
+
+- period: '2012'
   name: RSA célibataire, retrait_brute = 1500 * 12
   relative_error_margin: 0.01
   input:
