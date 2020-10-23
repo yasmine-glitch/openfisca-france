@@ -1,27 +1,46 @@
 from openfisca_france.model.base import Variable, Individu, Famille, MONTH, not_
 
+
+class covid_aide_exceptionnelle_tpe_chiffre_affaires_reference(Variable):
+    entity = Individu
+    value_type = bool
+    label = "Éligibilité à l'aide exceptionnelle pour les TPE pendant la crise sanitaire dûe au COVID-19"
+    reference = [
+        "Article 2 du décret n°2020-371 du 30 mars 2020"
+        "https://www.legifrance.gouv.fr/eli/decret/2020/3/30/ECOI2007755D/jo/article_2",
+        ]
+    definition_period = MONTH
+
+    def formula(individu, period):
+        period_1 = period.offset(-1, 'year')
+        return individu('tns_auto_entrepreneur_chiffre_affaires', period_1)
+
+
 class covid_aide_exceptionnelle_tpe_eligible(Variable):
     entity = Individu
     value_type = bool
     label = "Éligibilité à l'aide exceptionnelle pour les TPE pendant la crise sanitaire dûe au COVID-19"
     reference = [
-        "Décret n°2020-371 du 30 mars 2020"
-        "https://www.legifrance.gouv.fr/eli/decret/2020/3/30/ECOI2007755D/jo/texte",
-        "Ordonnance n° 2020-705 du 10 juin 2020"
-        "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000041983045?r=D4toiqv7co"
+        "Article 2 du décret n°2020-371 du 30 mars 2020"
+        "https://www.legifrance.gouv.fr/eli/decret/2020/3/30/ECOI2007755D/jo/article_2",
         ]
     definition_period = MONTH
 
     def formula(individu, period):
         chiffre_d_affaire = individu('tns_auto_entrepreneur_chiffre_affaires', period)
-        period_1 = period.offset(-1, 'year')
-        chiffre_d_affaire_annee_n_1 = individu('tns_auto_entrepreneur_chiffre_affaires', period_1)
-        return individu('travailleur_non_salarie', period) * (((chiffre_d_affaire - chiffre_d_affaire_annee_n_1) / chiffre_d_affaire_annee_n_1) < -0.5)
+        chiffre_d_affaire_refence = individu('covid_aide_exceptionnelle_tpe_chiffre_affaires_reference', period)
+        return individu('travailleur_non_salarie', period) * (((chiffre_d_affaire - chiffre_d_affaire_refence) / chiffre_d_affaire_refence) < -0.5)
 
 
 class covid_aide_exceptionnelle_tpe_montant(Variable):
     entity = Individu
     value_type = float
+    reference = [
+        "Article 3 du décret n°2020-371 du 30 mars 2020"
+        "https://www.legifrance.gouv.fr/eli/decret/2020/3/30/ECOI2007755D/jo/article_3",
+        "Article 1 de l'ordonnance n° 2020-705 du 10 juin 2020"
+        "https://www.legifrance.gouv.fr/eli/ordonnance/2020/6/10/ECOI2012371R/jo/article_1"
+        ]
     label = "Montant de l'aide exceptionnelle pour les TPE pendant la crise sanitaire dûe au COVID-19"
     definition_period = MONTH
     end = '2020-12-31'
@@ -30,9 +49,8 @@ class covid_aide_exceptionnelle_tpe_montant(Variable):
         eligibilite_fse = individu('covid_aide_exceptionnelle_tpe_eligible', period)
         plafond_fse = parameters(period).covid19.aide_exceptionnelle_tpe.plafond
         chiffre_d_affaire = individu('tns_auto_entrepreneur_chiffre_affaires', period)
-        period_1 = period.offset(-1, 'year')
-        chiffre_d_affaire_annee_n_1 = individu('tns_auto_entrepreneur_chiffre_affaires', period_1)
-        difference_chiffre_d_affaire = chiffre_d_affaire - chiffre_d_affaire_annee_n_1
+        chiffre_d_affaire_refence = individu('covid_aide_exceptionnelle_tpe_chiffre_affaires_reference', period)
+        difference_chiffre_d_affaire = chiffre_d_affaire - chiffre_d_affaire_refence
         return eligibilite_fse * (difference_chiffre_d_affaire < 0) * min_(plafond_fse, -difference_chiffre_d_affaire)
 
 
