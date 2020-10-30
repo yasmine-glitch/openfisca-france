@@ -1,5 +1,17 @@
 # Changelog
 
+#
+
+* Évolution du système socio-fiscal **non-rétrocompatible**.
+* Périodes concernées : toutes (AAH) et à partir du 01/04/2020 (ASI).
+* Zones impactées : 
+  - `model/prestations/minima_sociaux/aah.py`
+  - `parameters/prestations/minima_sociaux/asi/`
+  - `parameters/prestations/minima_sociaux/aah/montant.yaml`
+* Détails :
+  - ASI : met à jour les paramètres de montants et plafonds.
+  - AAH : met à jour la valeur par défaut de `aah_restriction_substantielle_durable_acces_emploi` et complète les tests.
+
 ### 54.0.2 [#1460](https://github.com/openfisca/openfisca-france/pull/1460)
 
 * Évolution du système socio-fiscal.
@@ -16,8 +28,8 @@
 * Changement mineur.
 * Périodes concernées : à partir du 01/04/2020.
 * Zones impactées : 
-  - `openfisca_france/parameters/prestations/minima_sociaux/asi/`
-  - `openfisca_france/parameters/prestations/minima_sociaux/aah/montant.yaml`
+  - `parameters/prestations/minima_sociaux/asi/`
+  - `parameters/prestations/minima_sociaux/aah/montant.yaml`
 * Détails :
   - Corrige des références législatives d'AAH et d'ASI.
 
