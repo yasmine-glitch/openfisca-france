@@ -1,0 +1,18 @@
+- period: 2021-01
+  input:
+    famille:
+      parents: [personne1]
+    menage:
+      personne_de_reference: personne1
+      statut_occupation_logement: locataire_vide
+      depcom: 32107
+      loyer: 0
+      charges_locatives: 0
+    individus:
+      personne1:
+        date_naissance:
+          2021-01: 1986-12-01
+    foyer_fiscal:
+      declarants: [personne1]
+  output:
+    aide_logement: 0
