@@ -1,0 +1,13 @@
+mois_min:
+  description: Durée minimum du séjour à l'étranger dans le cadre d'Erasmus +, en mois, inclusive
+  reference: https://www.service-public.fr/particuliers/vosdroits/F378
+  unit: month
+  values:
+    2020-12-02: 2
+
+mois_max:
+  description: Durée maximum du séjour à l'étranger dans le cadre d'Erasmus +, en mois, inclusive
+  reference: https://www.service-public.fr/particuliers/vosdroits/F378
+  unit: month
+  values:
+    2020-12-02: 12

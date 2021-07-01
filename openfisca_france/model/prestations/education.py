@@ -349,6 +349,15 @@ class fin_etudes_etranger(Variable):
     label = "Dernier jour de la formation ou stage dans un pays étranger dans le cadre d'un cycle d'études supérieures"
     definition_period = ETERNITY
 
+class pays_etudes_eee(Variable):
+    value_type = bool
+    entity = Individu
+    definition_period = MONTH
+    label = "Individu étudiant dans un pays membre de l'Espace Économique Européen (EEE)."
+
+    def formula(individu, period, parameters):
+        pays_etude = individu('etudiant_pays_eee', period)
+        return sum([pays_etude == str.encode(etat_membre) for etat_membre in parameters(period).geopolitique.eee])
 
 class mention_baccalaureat(Variable):
     value_type = Enum

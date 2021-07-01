@@ -1,0 +1,11 @@
+- name: Éligibilité à l'aide à la bourse Erasmus+ pour un stage
+  period: 2021-04
+  absolute_error_margin: 1
+  input:
+    debut_etudes_etranger: [ 2021-01, 2021-06, 2021-01 ]
+    fin_etudes_etranger: [ 2021-04, 2021-06, 2022-05 ]
+    statuts_etablissement_scolaire: [ public, public, public ]
+    pays_etudes_eee: [ true, false, true ]
+  output:
+    bourse_erasmus_plus_stage_eligibilite: [ true, false, false ]
+    bourse_erasmus_plus_stage_montant: [350, 0, 0]

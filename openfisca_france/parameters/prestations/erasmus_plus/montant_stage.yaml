@@ -1,0 +1,5 @@
+erasmus_plus_montant_stage:
+  values:
+    2020-02-01:
+      value: 350
+      reference: 'https://generation.erasmusplus.fr/sejour-bourse-erasmus-etudiant'
