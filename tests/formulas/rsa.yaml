@@ -625,7 +625,6 @@
           2020-11: 0
           2020-10: 0
   output:
-    rsa_forfait_logement: 67.84
     rsa_base_ressources: 960
     rsa: 0
 
@@ -661,7 +660,6 @@
           2020-11: 0
           2020-10: 0
   output:
-    rsa_forfait_logement: 67.84
     rsa_base_ressources: 943
     rsa: 0
 
