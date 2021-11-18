@@ -36,6 +36,8 @@ values:
     value: 8.15
   2018-04-01:
     value: 8.23
+  2021-04-01:
+    value: 8.46
 metadata:
   short_label: Montant plein Mayotte
   label_en: Special UI scheme
