@@ -1,5 +1,17 @@
 # Changelog
 
+##
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : toutes.
+* Zones impactées :
+  - `model/prelevements_obligatoires/prelevements_sociaux/cotisations_sociales/exonerations.py`
+  - `model/revenus/activite/salarie.py`
+  - `parameters/prelevements_sociaux/reductions_cotisations_sociales/`
+* Détails :
+  - Ajoute à partir de 2019 l'exonération pour travailleur occasionnel demandeur d'emploi (TO-DE) du secteur agricole
+  - Ajoute des caractéristiques du salarié : `contrat_duree_determinee_type`, `taches_salarie_type` et `travailleur_occasionnel_agricole`
+
 ### 116.13.2 [#1862](https://github.com/openfisca/openfisca-france/pull/1862)
 
 * Changement mineur.
