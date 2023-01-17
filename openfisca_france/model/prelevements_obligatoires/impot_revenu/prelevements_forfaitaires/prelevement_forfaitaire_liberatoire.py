@@ -1,5 +1,7 @@
 import logging
+from openfisca_core import periods
 from openfisca_france.model.base import *
+
 
 log = logging.getLogger(__name__)
 
