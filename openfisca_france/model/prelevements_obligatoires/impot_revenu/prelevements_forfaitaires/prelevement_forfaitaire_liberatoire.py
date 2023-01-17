@@ -118,7 +118,6 @@ class prelevement_forfaitaire_liberatoire(Variable):
 
         return pfl
 
-
     def formula_2018_01_01(foyer_fiscal, period, parameters):
         '''
         Prelèvement forfaitaire libératoire (PFL) sur les revenus du capital
