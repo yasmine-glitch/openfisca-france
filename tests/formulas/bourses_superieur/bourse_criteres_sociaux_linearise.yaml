@@ -1,0 +1,10 @@
+- period: 2023-03
+  input:
+    bourse_criteres_sociaux_eligibilite: true
+    bourse_criteres_sociaux_points_de_charge: 2
+    bourse_criteres_sociaux_base_ressources: 16000
+  output:
+    bourse_criteres_sociaux_echelon: 4
+    bourse_criteres_sociaux_plafond_ressources_echelon_superieur: 14600
+    bourse_criteres_sociaux_plafond_ressources_echelon: 17100
+    bourse_criteres_sociaux: 4492/10

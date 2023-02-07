@@ -20,6 +20,24 @@ class bourse_criteres_sociaux(Variable):
         echelon = individu('bourse_criteres_sociaux_echelon', period)
         return montants.calc(echelon)
 
+    def formula_2023_03(individu, period, parameters):
+        montants = parameters(period).prestations_sociales.aides_jeunes.bourses.bourses_enseignement_superieur.criteres_sociaux.montants
+        echelon = individu('bourse_criteres_sociaux_echelon', period)
+
+        montant = montants.calc(echelon)
+        montant_echelon_superieur = montants.calc(echelon + 1)
+
+        rbg_base = individu('bourse_criteres_sociaux_plafond_ressources_echelon', period)
+        rbg_superieur = individu('bourse_criteres_sociaux_plafond_ressources_echelon_superieur', period)
+        rbg = individu('bourse_criteres_sociaux_base_ressources', period)
+
+        a = (montant_echelon_superieur - montant) / (rbg_base - rbg_superieur)
+        b = montant_echelon_superieur
+
+        montant_linearise = a * (rbg_superieur - rbg) + b
+
+        return (montant > 0) * montant_linearise
+
 
 class bourse_criteres_sociaux_eligibilite_etude(Variable):
     value_type = bool
@@ -357,3 +375,105 @@ class bourse_criteres_sociaux_echelon(Variable):
 
         eligible = individu('bourse_criteres_sociaux_eligibilite', period)
         return where(eligible, echelon, -1)
+
+
+class bourse_criteres_sociaux_plafond_ressources_echelon_superieur(Variable):
+    entity = Individu
+    value_type = int
+    reference = [
+        "Circulaire ESRS2013435C - Annexe 7 - Taux et cumul de la bourse d'enseignement supérieur sur critères sociaux / 1 - Les taux de bourse d'enseignement supérieur sur critères sociaux",
+        'https://www.education.gouv.fr/bo/20/Hebdo25/ESRS2013435C.htm',
+        "Arrêté du 22 juillet 2020 fixant les plafonds de ressources relatifs aux bourses d'enseignement supérieur du ministère de l'enseignement supérieur, de la recherche et de l'innovation pour l'année universitaire 2020-2021",
+        'https://www.legifrance.gouv.fr/eli/arrete/2020/7/22/ESRS2016543A/jo/texte'
+        ]
+    label = "Plafond de ressouce de l'échelon supérieur de la bourse sur critères sociaux de l'enseignement supérieur en prenant uniquement en compte les critères de ressources et de points de charge"
+    definition_period = MONTH
+    set_input = set_input_dispatch_by_period
+
+    def formula(individu, period, parameters):
+        points_de_charge = individu('bourse_criteres_sociaux_points_de_charge', period)
+        baremes = parameters(period).prestations_sociales.aides_jeunes.bourses.bourses_enseignement_superieur.criteres_sociaux.plafond_ressources
+        plafond_echelon_0bis = baremes.echelon_0bis.calc(points_de_charge)
+        plafond_echelon_1 = baremes.echelon_1.calc(points_de_charge)
+        plafond_echelon_2 = baremes.echelon_2.calc(points_de_charge)
+        plafond_echelon_3 = baremes.echelon_3.calc(points_de_charge)
+        plafond_echelon_4 = baremes.echelon_4.calc(points_de_charge)
+        plafond_echelon_5 = baremes.echelon_5.calc(points_de_charge)
+        plafond_echelon_6 = baremes.echelon_6.calc(points_de_charge)
+        plafond_echelon_7 = baremes.echelon_7.calc(points_de_charge)
+
+        base_ressources = individu('bourse_criteres_sociaux_base_ressources', period)
+        plafond_ressources = select(
+            [
+                base_ressources <= plafond_echelon_7,
+                base_ressources <= plafond_echelon_6,
+                base_ressources <= plafond_echelon_5,
+                base_ressources <= plafond_echelon_4,
+                base_ressources <= plafond_echelon_3,
+                base_ressources <= plafond_echelon_2,
+                base_ressources <= plafond_echelon_1,
+                base_ressources <= plafond_echelon_0bis,
+                ],
+            [
+                plafond_echelon_7,
+                plafond_echelon_7,
+                plafond_echelon_6,
+                plafond_echelon_5,
+                plafond_echelon_4,
+                plafond_echelon_3,
+                plafond_echelon_2,
+                plafond_echelon_1], default=plafond_echelon_0bis)
+
+        eligible = individu('bourse_criteres_sociaux_eligibilite', period)
+        return where(eligible, plafond_ressources, -1)
+
+
+class bourse_criteres_sociaux_plafond_ressources_echelon(Variable):
+    entity = Individu
+    value_type = int
+    reference = [
+        "Circulaire ESRS2013435C - Annexe 7 - Taux et cumul de la bourse d'enseignement supérieur sur critères sociaux / 1 - Les taux de bourse d'enseignement supérieur sur critères sociaux",
+        'https://www.education.gouv.fr/bo/20/Hebdo25/ESRS2013435C.htm',
+        "Arrêté du 22 juillet 2020 fixant les plafonds de ressources relatifs aux bourses d'enseignement supérieur du ministère de l'enseignement supérieur, de la recherche et de l'innovation pour l'année universitaire 2020-2021",
+        'https://www.legifrance.gouv.fr/eli/arrete/2020/7/22/ESRS2016543A/jo/texte'
+        ]
+    label = "Plafond de ressouce de l'échelon de la bourse sur critères sociaux de l'enseignement supérieur en prenant uniquement en compte les critères de ressources et de points de charge"
+    definition_period = MONTH
+    set_input = set_input_dispatch_by_period
+
+    def formula(individu, period, parameters):
+        points_de_charge = individu('bourse_criteres_sociaux_points_de_charge', period)
+        baremes = parameters(period).prestations_sociales.aides_jeunes.bourses.bourses_enseignement_superieur.criteres_sociaux.plafond_ressources
+        plafond_echelon_0bis = baremes.echelon_0bis.calc(points_de_charge)
+        plafond_echelon_1 = baremes.echelon_1.calc(points_de_charge)
+        plafond_echelon_2 = baremes.echelon_2.calc(points_de_charge)
+        plafond_echelon_3 = baremes.echelon_3.calc(points_de_charge)
+        plafond_echelon_4 = baremes.echelon_4.calc(points_de_charge)
+        plafond_echelon_5 = baremes.echelon_5.calc(points_de_charge)
+        plafond_echelon_6 = baremes.echelon_6.calc(points_de_charge)
+        plafond_echelon_7 = baremes.echelon_7.calc(points_de_charge)
+
+        base_ressources = individu('bourse_criteres_sociaux_base_ressources', period)
+        plafond_ressources = select(
+            [
+                base_ressources <= plafond_echelon_7,
+                base_ressources <= plafond_echelon_6,
+                base_ressources <= plafond_echelon_5,
+                base_ressources <= plafond_echelon_4,
+                base_ressources <= plafond_echelon_3,
+                base_ressources <= plafond_echelon_2,
+                base_ressources <= plafond_echelon_1,
+                base_ressources <= plafond_echelon_0bis,
+                ],
+            [
+                plafond_echelon_7,
+                plafond_echelon_6,
+                plafond_echelon_5,
+                plafond_echelon_4,
+                plafond_echelon_3,
+                plafond_echelon_2,
+                plafond_echelon_1,
+                plafond_echelon_0bis], default=0)
+
+        eligible = individu('bourse_criteres_sociaux_eligibilite', period)
+        return where(eligible, plafond_ressources, -1)
