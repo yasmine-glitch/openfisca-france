@@ -111,11 +111,7 @@ class aah_base_ressources(Variable):
 
             base_ressource_demandeur = assiette_revenu_activite_demandeur(base_ressource_activite) + base_ressource_hors_activite
 
-            base_ressource_demandeur_conjoint = individu.famille.demandeur('aah_base_ressources_activite_eval_trimestrielle', period) + individu.famille.demandeur('aah_base_ressources_hors_activite_eval_trimestrielle', period)
-            base_ressource_conjoint_conjoint = individu.famille.conjoint('aah_base_ressources_activite_eval_trimestrielle', period) + individu.famille.conjoint('aah_base_ressources_hors_activite_eval_trimestrielle', period)
-            base_ressource_conjoint = base_ressource_conjoint_conjoint * individu.has_role(Famille.DEMANDEUR) + base_ressource_demandeur_conjoint * individu.has_role(Famille.CONJOINT)
-
-            return base_ressource_demandeur + assiette_conjoint(base_ressource_conjoint)
+            return base_ressource_demandeur
 
         def base_ressource_eval_annuelle():
             base_ressource_activite = assiette_revenu_activite_demandeur(individu('aah_base_ressources_activite_eval_annuelle', period))
@@ -183,7 +179,7 @@ class aah_base_ressources(Variable):
         law = parameters(period)
         aah = law.prestations_sociales.prestations_etat_de_sante.invalidite.aah
 
-        en_activite = ((individu('salaire_imposable', period, options = [ADD]) + individu('rpns_imposables', period.last_year)) > 0)
+        en_activite = individu('activite', period) == TypesActivite.actif
 
         def assiette_revenu_activite_demandeur(revenus_demandeur):
             smic_brut_annuel = 12 * law.marche_travail.salaire_minimum.smic.smic_b_horaire * law.marche_travail.salaire_minimum.smic.nb_heures_travail_mensuel
