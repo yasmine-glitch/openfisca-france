@@ -8,6 +8,125 @@
   - Ajout de l'abattement sur les ressources prévu pour les individus en cessation d'activité pour l'allocation aux adultes handicapés
  
 
+### 146.2.1 [#2100](https://github.com/openfisca/openfisca-france/pull/2100)
+
+* Changement mineur.
+* Périodes concernées : toutes.
+* Zones impactées :
+  * `parameters/impot_revenu/calcul_reductions_impots/pme/souscription_capital/taux.yaml`
+  * `parameters/prestations_sociales/aides_jeunes/bourses/bourses_enseignement_superieur/criteres_sociaux/plafond_ressources`
+* Détails :
+  - Renommage d'un last_review en last_value_still_valid_on
+  - Suppression de href invalides dans des références
+
+## 146.2.0 [#2044](https://github.com/openfisca/openfisca-france/pull/2044)
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : à partir du 01/01/2015.
+* Zones impactées :
+    - `prelevements_obligatoires/prelevements_sociaux/contributions_sociales/remplacement.py`
+    - `tests/formulas/csg/csg_remplacement.py`
+* Détails :
+  - Correction de la condition d'exonération de contributions sociales sur le chômage en cas de revenus inférieurs auSMIC mensuel brut : ajoute le cas du cumul d'allocations chômage et de revenus d'activité.
+
+## 146.1.0 [#2091](https://github.com/openfisca/openfisca-france/pull/2091)
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : toutes.
+* Zones impactées :
+    - `caracteristiques_socio_demographiques/demographie.py`
+    - `prestations/enseignement_superieur/bourse_criteres_sociaux.py`
+* Détails :
+  - Ajoute une variable orphelin
+  - Améliore le calcul de la bourse sur critères sociaux pour les personnes orphelines.
+
+### 146.0.7 [#2073](https://github.com/openfisca/openfisca-france/pull/2073)
+
+*Toutes les périodes* 
+* Zones impactées : 
+    * `prelevements_sociaux/contributions_sociales/csg/remplacement`
+    * `prelevements_sociaux/cotisations_securite_sociale_regime_general`
+    * `prelevements_obligatoires/prelevements_sociaux/cotisations_sociales/travail_prive`
+* Détails :
+  - Description de la fonctionnalité ajoutée ou du nouveau comportement adopté.
+  - Cas dans lesquels une erreur était constatée.
+
+### 146.0.6 [#2086](https://github.com/openfisca/openfisca-france/pull/2086)
+
+* Changement mineur.
+* Périodes concernées : toutes.
+* Zones impactées : `prestations_sociales/aides_jeunes/bourses/bourses_enseignement_superieur/criteres_sociaux/plafond_ressources`.
+* Détails :
+  - Nettoyage des références pour passage de la validation des paramètres.
+  
+### 146.0.5 [#2075](https://github.com/openfisca/openfisca-france/pull/2075)
+
+* Périodes concernées : toutes
+* Zones impactées :
+* `prestations_sociales/solidarite_insertion/autre_solidarite/aefa`.
+* `prestations_sociales/prestations_familiales/prestations_generales/af/crds`
+* Détails : clarifie les labels des paramètres de la prime de Noël
+
+### 146.0.4 [#2076](https://github.com/openfisca/openfisca-france/pull/2076)
+
+* Périodes concernées : toutes
+* Zones impactées : `prestations_sociales/prestations_familiales/prestations_generales/af/af_cm/age2` et `prestations_sociales/prestations_familiales/prestations_generales/af/af_cm/age3`
+* Détails : Allocation de soutien familial : Renomme les paramètres "âge maximal" pour lever le doute sur les termes "forfait de 2003 inclus"
+
+### 146.0.3 [#2081](https://github.com/openfisca/openfisca-france/pull/2081)
+
+* Changement mineur.
+* Périodes concernées : toutes.
+* Zones impactées : `prestations/jeunes/contra_engagement_jeune.py`.
+* Détails :
+  - Les nouveaux paramètres créées dans la PR #2077 sont en format .yml et non .yaml. On corrige de cela.
+
+### 146.0.2 [#2080](https://github.com/openfisca/openfisca-france/pull/2080)
+
+* Crée une nouvelle variable intermédiaire
+* Périodes concernées : toutes.
+* Zones impactées:
+   - `mesures.py`
+   - `prelevements_obligatoires/prelevements_sociaux/contributions_sociales/activite.py`
+   - `prestations/jeunes/cotrat_engagement_jeune.py`
+   - `prestations/visale.py`
+* Détails :
+  - Crée une variable `revenus_non_salarie_nets`, plutôt que de copier-coller sa définition dans plusieurs formules.
+
+### 146.0.1 [#2079](https://github.com/openfisca/openfisca-france/pull/2079)
+
+* Actualisation de paramètres.
+* Périodes concernées : à partir du 01/04/2023.
+* Zones impactées : `prestations/jeunes/contrat_engagement_jeune.py`.
+* Détails :
+  - Introduit la revalorisation de l'allocation du CEJ du 1er avril 2023.
+
+# 146.0.0 [#2077](https://github.com/openfisca/openfisca-france/pull/2077)
+
+* Corrections d'erreurs
+* Périodes concernées : à partir du 01/03/2022.
+* Zones impactées : `prestations/jeunes/contrat_engagement_jeune.py`.
+* Détails :
+  - Prise en compte de la dégressivité en fonction des ressources et correction des bases ressources
+  - Corrections de références législatives
+  - Réagencement des paramètres
+  - Réagencement des formules d'éligibilité
+  - Intègre la revalorisation de juillet 2022
+  - Changements de nom ou suppressions de variables:
+     - Renommage de `contrat_engagement_jeune_montant` par `contrat_engagement_jeune_montant_forfaitaire`
+     - Suppression de `contrat_engagement_jeune_eligbilite_statut`, `contrat_engagement_jeune_eligibilite_age` et `contrat_engagement_jeune_eligibilite_ressources`. Remplacement par `contrat_engagement_jeune_eligibilite`.
+
+## 145.1.0 [#2068](https://github.com/openfisca/openfisca-france/pull/2068)
+
+* Évolution du système socio-fiscal : Changement mineur.
+* Périodes concernées : à partir du 15/03/2023 (En attente de publication legifrance)
+* Zones impactées :
+- `openfisca_france/parameters/prestations_sociales/aides_jeunes/bourses/bourses_enseignement_superieur/criteres_sociaux/plafond_ressources/*`.
+- `openfisca_france/parameters/prestations_sociales/aides_jeunes/bourses/bourses_enseignement_superieur/criteres_sociaux/montants.yaml`.
+* Détails :
+  - Revalorisation des plafonds et montants de la Bourse aux Critères Sociaux pour tous les échelons pour la periode 2023-2024.
+  - Les données nous viennent d'une correspondance avec le CNOUS, les dates et le sources seront éditées dès publication sur Legifrance.
+
 # 145.0.0 [#2039](https://github.com/openfisca/openfisca-france/pull/2039)
 
 * Amélioration technique.
