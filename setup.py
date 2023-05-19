@@ -39,35 +39,36 @@ setup(
         ],
     extras_require = {
         'inversion_revenus': [
-            'scipy >= 0.17',
+            'scipy >= 1.10.1, < 2.0',
             ],
         'de_net_a_brut': [
-            'scipy >= 0.17',
+            'scipy >= 1.10.1, < 2.0',
             ],
         'taxipp': [
-            'pandas >= 0.13',
+            'pandas >= 1.5.3, < 2.0',
             ],
         'dev': [
-            'autopep8 ==1.5.7',
-            'flake8 >= 4.0.0, < 5.0.0',
+            'autopep8 >= 2.0.2, < 3.0',
+            'flake8 >= 6.0.0, < 7.0.0',
             'flake8-print >= 5.0.0, < 6.0.0',
-            'flake8-quotes >= 3.3.1, < 6.0.0',
-            'pytest >= 5.0.0, < 7.0.0',
-            'scipy >= 0.17',  # Only used to test de_net_a_brut reform
-            'requests >= 2.8',
-            'yamllint >=1.11.1,<1.27'
+            'flake8-quotes >= 3.3.2',
+            'pytest >= 7.2.2, < 8.0',
+            'scipy >= 1.10.1, < 2.0',  # Only used to test de_net_a_brut reform
+            'requests >= 2.28.2, < 3.0',
+            'yamllint >= 1.30.0, < 2.0'
             ],
         'casd-dev': [
             # Same as dev with packages not available at CASD removed
-            'autopep8 >=1.3.2',
-            'pytest >= 5.0.0, < 7.0.0',
-            'requests >= 2.8',
-            'scipy >= 0.17',  # Only used to test de_net_a_brut reform
+            'autopep8 >= 2.0.2, < 3.0',
+            'pytest >= 7.2.2, < 8.0',
+            'requests >= 2.28.2, < 3.0',
+            'scipy >= 1.10.1, < 2.0'
             ]
         },
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-        'OpenFisca-Core >=38.0.2,<38.0.3',
+        # 'OpenFisca-Core >=38.0.2,<40.0.0',
+        'OpenFisca-Core @ git+https://github.com/openfisca/openfisca-core.git@msa_test_python_3_9',
         ],
     packages = find_packages(exclude = [
         'openfisca_france.tests*',
