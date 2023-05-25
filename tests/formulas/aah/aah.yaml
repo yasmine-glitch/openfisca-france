@@ -701,7 +701,6 @@
     aah:
       2022-05: [920, 0, 0]
 
-
 - name: AAH demandeur sans ressource et conjoint salarié
   period: month:2004-04
   absolute_error_margin: 0.005
@@ -830,14 +829,14 @@
   absolute_error_margin: 1
   input:
     taux_incapacite: 0.8
-    age: 50  # eligible aah
-    salaire_imposable: 
+    age: 50 # eligible aah
+    salaire_imposable:
       2021: 24000
     en_couple: 0
     af_nbenf: 0
-    activite: 
+    activite:
       2023-03: inactif
-      2023-02: actif 
+      2023-02: actif
       2023-01: actif
       2022-12: actif
   output:

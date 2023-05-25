@@ -138,7 +138,7 @@ class aah_base_ressources(Variable):
         aah = law.prestations_sociales.prestations_etat_de_sante.invalidite.aah
 
         en_activite = individu('activite', period) == TypesActivite.actif
-        
+
         def assiette_conjoint(revenus_conjoint):
             af_nbenf = individu.famille('af_nbenf', period)
             revenus = (1 - law.impot_revenu.calcul_revenus_imposables.deductions.taux_salaires_pensions) * revenus_conjoint
