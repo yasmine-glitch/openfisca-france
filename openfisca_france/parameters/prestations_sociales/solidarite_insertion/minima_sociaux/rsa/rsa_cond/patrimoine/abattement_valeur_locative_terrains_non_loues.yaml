@@ -3,7 +3,7 @@ values:
   2009-01-01:
     value: 0.8
 metadata:
-  short_label: Taux de la valeur locative d'immeubles bâtis non loués pris en compte dans les ressources
+  short_label: Taux de la valeur locative de terrains non bâtis et non loués pris en compte dans les ressources
   last_value_still_valid_on: "2022-04-04"
   unit: /1
   reference:
