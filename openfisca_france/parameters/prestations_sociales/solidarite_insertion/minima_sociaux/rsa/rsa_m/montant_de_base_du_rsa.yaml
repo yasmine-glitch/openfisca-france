@@ -1,4 +1,4 @@
-description: Montant mensuel forfaitaire, base de calcul du revenu de solidarité active (RSA)
+description: Montant mensuel forfaitaire maximal pour un foyer d'une seule personne, base de calcul du revenu de solidarité active (RSA)
 values:
   2009-06-01:
     value: 454.63
@@ -43,7 +43,7 @@ values:
   2023-04-01:
     value: 607.75
 metadata:
-  short_label: Montant mensuel forfaitaire, base du calcul du RSA
+  short_label: Montant mensuel maximal pour un foyer d'une seule personne, base du calcul du RSA
   last_value_still_valid_on: "2023-05-09"
   label_en: "Active solidarity income (RSA): Basic amount"
   ipp_csv_id: brsa

@@ -1,0 +1,7 @@
+description: Majoration du montant maximal (en % du montant de base) selon la composition familiale - Revenu de solidarité active (RSA)
+metadata:
+  short_label: Majoration du montant de base selon composition familiale
+  label_en: "Active solidarity income (RSA): Extra allowance and minimal amount"
+  order:
+  - couple_1_enfant_ou_2e_enfant
+  - couples_celibataire_avec_enfant

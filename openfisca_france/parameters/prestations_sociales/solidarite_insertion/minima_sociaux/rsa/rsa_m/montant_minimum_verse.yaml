@@ -1,9 +1,9 @@
-description: Montant minimum versé pour le Revenu de solidarité active (RSA)
+description: Montant mensuel minimum versé pour le Revenu de solidarité active (RSA)
 values:
   2009-06-01:
     value: 6
 metadata:
-  short_label: Montant mimimum
+  short_label: Montant mensuel mimimum
   last_value_still_valid_on: "2022-03-31"
   label_en: "Active solidarity income (RSA): Extra allowance and minimal amount"
   ipp_csv_id: min_rsa_rmi

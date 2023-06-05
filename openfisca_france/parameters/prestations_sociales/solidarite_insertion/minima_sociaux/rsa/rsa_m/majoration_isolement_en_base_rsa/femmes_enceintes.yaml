@@ -1,4 +1,4 @@
-description: Montant pour les Parents isolés ou femmes enceintes (en % de la base) du Revenu de solidarité active (RSA)
+description: Montant majoré pour les personnes isolées avec enfant et les femmes enceintes isolées (en % du montant de base) du Revenu de solidarité active (RSA)
 values:
   1997-01-01:
     value: 0
@@ -7,7 +7,7 @@ values:
   2016-01-01:
     value: 1.28412
 metadata:
-  short_label: Parents isolés ou femmes enceintes
+  short_label: Montant majoré en % du montant de base
   last_value_still_valid_on: "2022-03-29"
   label_en: "Active solidarity income (RSA): Extra allowance and minimal amount"
   ipp_csv_id: rsa_isole_enceinte

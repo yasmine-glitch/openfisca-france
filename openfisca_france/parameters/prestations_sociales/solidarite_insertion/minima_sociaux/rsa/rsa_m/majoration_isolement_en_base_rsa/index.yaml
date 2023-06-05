@@ -1,0 +1,8 @@
+description: Montant pour personne isolée avec enfant à charge ou femme isolée en état de grossesse (en % de la base) du Revenu de solidarité active (RSA)
+metadata:
+  short_label: Majoration pour les personnes isolées avec enfant et les femmes enceintes isolées
+  label_en: "Active solidarity income (RSA): Extra allowance and minimal amount"
+  order:
+  - femmes_enceintes
+  - par_enfant_a_charge
+  - age_limite_enfant

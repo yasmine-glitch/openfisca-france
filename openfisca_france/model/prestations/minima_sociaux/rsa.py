@@ -382,7 +382,7 @@ class rsa_enfant_a_charge(Variable):
             majo_rsa_femmes_enceintes = P_rsa.rsa_maj.majoration_isolement_en_base_rsa.femmes_enceintes
             majo_rsa_par_enfant_a_charge = P_rsa.rsa_maj.majoration_isolement_en_base_rsa.par_enfant_a_charge
             montant_base_rsa = P_rsa.rsa_m.montant_de_base_du_rsa
-            taux_personne_supp = P_rsa.rsa_maj.maj_montant_max.par_enfant_supplementaire
+            taux_personne_supp = P_rsa.rsa_m.maj_montant_max.par_enfant_supplementaire
         else:
             age_pac = P_rmi.rmi_cond.age_pac
             majo_rsa_femmes_enceintes = 0
@@ -872,8 +872,8 @@ class rsa_forfait_logement(Variable):
         if period.start.date >= date(2009, 6, 1):
             params = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.rsa
             montant_base = params.rsa_m.montant_de_base_du_rsa
-            taux_2p = 1 + params.rsa_maj.maj_montant_max.couples_celibataire_avec_enfant
-            taux_3p = taux_2p + params.rsa_maj.maj_montant_max.couple_1_enfant_ou_2e_enfant
+            taux_2p = 1 + params.rsa_m.maj_montant_max.couples_celibataire_avec_enfant
+            taux_3p = taux_2p + params.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant
             forf_logement_taux_1p = params.rsa_forfait_logement.taux_1_personne
             forf_logement_taux_2p = params.rsa_forfait_logement.taux_2_personnes * taux_2p
             forf_logement_taux_3p = params.rsa_forfait_logement.taux_3_personnes_ou_plus * taux_3p
@@ -1000,11 +1000,11 @@ class rsa_socle(Variable):
 
         taux = (
             1
-            + (nb_personnes >= 2) * rsa.rsa_maj.maj_montant_max.couples_celibataire_avec_enfant
-            + (nb_personnes >= 3) * rsa.rsa_maj.maj_montant_max.couple_1_enfant_ou_2e_enfant
-            + (nb_personnes >= 4) * where(nb_parents == 1, rsa.rsa_maj.maj_montant_max.par_enfant_supplementaire, rsa.rsa_maj.maj_montant_max.couple_1_enfant_ou_2e_enfant)
+            + (nb_personnes >= 2) * rsa.rsa_m.maj_montant_max.couples_celibataire_avec_enfant
+            + (nb_personnes >= 3) * rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant
+            + (nb_personnes >= 4) * where(nb_parents == 1, rsa.rsa_m.maj_montant_max.par_enfant_supplementaire, rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant)
             # Si nb_parents == 1, pas de conjoint, la 4e personne est un enfant, donc le taux est de 40%.
-            + max_(nb_personnes - 4, 0) * rsa.rsa_maj.maj_montant_max.par_enfant_supplementaire
+            + max_(nb_personnes - 4, 0) * rsa.rsa_m.maj_montant_max.par_enfant_supplementaire
             )
 
         socle = rsa.rsa_m.montant_de_base_du_rsa
