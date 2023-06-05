@@ -59,6 +59,26 @@
   - Supprime taux16, qui correspond à pvce. Le documente et corrige pvce.
 
 
+### 147.2.4 [#2117](https://github.com/openfisca/openfisca-france/pull/2117)
+
+* Évolution du système socio-fiscal.
+* Périodes concernées : toutes.
+* Zones impactées :
+  - `prestations/minima_sociaux/rsa.py`
+  - `parameters/prestations_sociales/solidarite_insertion/minima_sociaux/rsa`
+  - `prestations/minima_sociaux/cs/cmu.py`
+  - `prestations/jeunes/garantie_jeunes.py`.
+* Détails :
+  - Renomme certains paramètres du RSA
+  - Réorganise les dossiers du RSA
+- - - -
+
+Ces changements (effacez les lignes ne correspondant pas à votre cas) :
+- Modifient l'API publique d'OpenFisca France (par exemple renommage ou suppression de variables).
+- Ajoutent une fonctionnalité (par exemple ajout d'une variable).
+- Corrigent ou améliorent un calcul déjà existant.
+
+
 ### 147.2.3 [#2113](https://github.com/openfisca/openfisca-france/pull/2113)
 
 * Correction du système socio-fiscal.
