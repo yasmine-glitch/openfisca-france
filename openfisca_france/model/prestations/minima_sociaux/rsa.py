@@ -708,11 +708,11 @@ class rsa_eligibilite(Variable):
             rsa_jeune_condition_i = False
         else:
             # Les jeunes de moins de 25 ans sont éligibles sous condition d'activité suffisante
-            # à partir de 2010 rendue ici par rsa.rsa_cond.rsa_jeune == 1
+            # à partir de 2010 rendue ici par rsa.rsa_cond.rsa_jeune.date_debut_rsa_jeune == 1
             rsa_jeune_condition_i = (
-                (rsa.rsa_cond.rsa_jeune == 1)
-                * (age_i > rsa.rsa_cond.age_min_rsa_jeune)
-                * (age_i < rsa.rsa_cond.age_max_rsa_jeune)
+                (rsa.rsa_cond.rsa_jeune.date_debut_rsa_jeune == 1)
+                * (age_i > rsa.rsa_cond.rsa_jeune.age_min_rsa_jeune)
+                * (age_i < rsa.rsa_cond.rsa_jeune.age_max_rsa_jeune)
                 * rsa_jeune_condition_heures_travail_remplie_i
                 )
 
