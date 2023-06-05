@@ -597,10 +597,14 @@ class rsa_montant(Variable):
 
 
 class rsa(Variable):
+    # Explication du dispositif : https://www.service-public.fr/particuliers/vosdroits/N19775
     calculate_output = calculate_output_add
     value_type = float
     label = 'Revenu de solidarité active'
-    reference = 'https://www.service-public.fr/particuliers/vosdroits/N19775'
+    reference = [
+        "Articles L262-1 à L266-2 du Code de l'action sociale et des familles"
+        'https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074069/LEGISCTA000006157612/#LEGISCTA000019869136'
+        ]
     entity = Famille
     definition_period = MONTH
     set_input = set_input_divide_by_period
