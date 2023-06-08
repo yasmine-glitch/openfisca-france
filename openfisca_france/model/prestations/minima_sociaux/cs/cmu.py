@@ -32,7 +32,7 @@ class css_cmu_forfait_logement_base(Variable):
         P = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.cs.css.forfait_logement_sans_al
         law_rmi_rsa = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.rsa
 
-        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_de_base_du_rsa * (
+        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_forfaitaire_rsa * (
             1
             + law_rmi_rsa.rsa_m.maj_montant_max.couples_celibataire_avec_enfant * (nbp_foyer >= 2)
             + law_rmi_rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant * (nbp_foyer >= 3)
@@ -48,7 +48,7 @@ class css_cmu_forfait_logement_base(Variable):
         P = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.cs.cmu.forfait_logement_sans_al
         law_rmi_rsa = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.rsa
 
-        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_de_base_du_rsa * (
+        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_forfaitaire_rsa * (
             1
             + law_rmi_rsa.rsa_m.maj_montant_max.couples_celibataire_avec_enfant * (nbp_foyer >= 2)
             + law_rmi_rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant * (nbp_foyer >= 3)
@@ -89,7 +89,7 @@ class css_cmu_forfait_logement_al(Variable):
         P = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.cs.css.forfait_logement_avec_al
         law_rmi_rsa = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.rsa
 
-        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_de_base_du_rsa * (
+        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_forfaitaire_rsa * (
             1
             + law_rmi_rsa.rsa_m.maj_montant_max.couples_celibataire_avec_enfant * (nbp_foyer >= 2)
             + law_rmi_rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant * (nbp_foyer >= 3)
@@ -108,7 +108,7 @@ class css_cmu_forfait_logement_al(Variable):
         P = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.cs.cmu.forfait_logement_avec_al
         law_rmi_rsa = parameters(period).prestations_sociales.solidarite_insertion.minima_sociaux.rsa
 
-        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_de_base_du_rsa * (
+        montant_rsa_socle = law_rmi_rsa.rsa_m.montant_forfaitaire_rsa * (
             1
             + law_rmi_rsa.rsa_m.maj_montant_max.couples_celibataire_avec_enfant * (nbp_foyer >= 2)
             + law_rmi_rsa.rsa_m.maj_montant_max.couple_1_enfant_ou_2e_enfant * (nbp_foyer >= 3)
