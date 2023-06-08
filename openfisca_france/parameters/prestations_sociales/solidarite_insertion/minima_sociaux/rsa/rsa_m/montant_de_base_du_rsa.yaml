@@ -1,4 +1,4 @@
-description: Montant de base mensuel, nommé forfaitaire dans la loi, représente aussi le montant maximal pour un foyer d'une seule personne - Revenu de solidarité active (RSA)
+description: Montant de base (monant forfaitaire) mensuel du revenu de soildarité active (RSA)
 values:
   2009-06-01:
     value: 454.63
@@ -141,4 +141,4 @@ metadata:
     - title: Revalorisation de 4%
     2023-04-01:
     - title: Revalorisation de 1.54%
-  documentation: Le revenu de solidarité active est une allocation qui porte les ressources du foyer au niveau du montant forfaitaire.
+  documentation: Le revenu de solidarité active est une allocation qui porte les ressources du foyer au niveau du montant forfaitaire. Le montant de base représente aussi le montant maximal pour un foyer d'une seule personne.
