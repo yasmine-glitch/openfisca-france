@@ -5,5 +5,4 @@ metadata:
   order:
   - montant_minimum_verse
   - montant_forfaitaire_rsa
-  - maj_montant_max
-  - majorations_isolement_en_base_rsa
+
