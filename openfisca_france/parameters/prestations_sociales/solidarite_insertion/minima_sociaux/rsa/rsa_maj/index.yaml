@@ -4,5 +4,5 @@ metadata:
   label_en: "Active solidarity income (RSA): Extra allowance and minimal amount"
   order:
   - maj_montant_max
-  - majorations_isolement_en_base_rsa
+  - majoration_isolement_en_base_rsa
   - majoration_ressources_revenus_activite
