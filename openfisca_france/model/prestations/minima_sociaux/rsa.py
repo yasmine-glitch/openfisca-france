@@ -602,7 +602,7 @@ class rsa(Variable):
     value_type = float
     label = 'Revenu de solidarité active'
     reference = [
-        "Articles L262-1 à L266-2 du Code de l'action sociale et des familles"
+        "Articles L262-1 à L266-2 du Code de l'action sociale et des familles",
         'https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074069/LEGISCTA000006157612/#LEGISCTA000019869136'
         ]
     entity = Famille
