@@ -4,5 +4,4 @@ metadata:
   label_en: "Active solidarity income (RSA): Basic amount"
   order:
   - montant_minimum_verse
-  - montant_forfaitaire_rsa
-
+  - montant_de_base_du_rsa
