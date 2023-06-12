@@ -1,4 +1,7 @@
 description: Abattement pour le Régime spécial micro BNC pour les activités de service
 metadata:
+  order:
+  - plafond
+  - taux
   reference:
     href: https://www.ipp.eu/outils/baremes-ipp/
