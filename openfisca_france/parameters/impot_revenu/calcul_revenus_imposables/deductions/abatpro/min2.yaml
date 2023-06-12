@@ -1,5 +1,7 @@
 description: Abattement minimum (Demandeur d'emploi) de la déduction forfaitaire pour frais professionnels
 values:
+  1942-01-01:
+    value: null
   1997-01-01:
     value: 5000
   1998-01-01:

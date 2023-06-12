@@ -67,6 +67,10 @@ metadata:
   ipp_csv_id: min_abtsal
   unit: currency
   reference:
+    1977-01-01:
+      title: LF pour 1978
+    1978-01-01:
+      title: LF pour 1979
     1990-01-01:
       title: LF pour 1991
     1991-01-01:
@@ -143,6 +147,8 @@ metadata:
     2021-01-01:
       title: Revalorisation comme prevue dans l'article 83 de la Loi 2020-1721 du 29/12/2020 (LF pour 2021)
   official_journal_date:
+    1977-01-01: "1977-12-31"
+    1978-01-01: "1978-12-30"
     1990-01-01: "1990-12-30"
     1991-01-01: "1991-12-31"
     1992-01-01: "1992-12-31"
@@ -171,6 +177,8 @@ metadata:
     2019-01-01: "2019-12-29"
     2020-01-01: "2020-12-30"
   notes:
+    1978-01-01:
+    - title: Le maximum sur les pensions est pris en compte par foyer fiscal pour l'imposition des revenus de 1977 et 1978.
     1993-01-01:
     - title: Montant révisé chaque année dans la même proportion que la limite supérieure de la première tranche du barème de l'impôt sur le revenu
     1997-01-01:
