@@ -1,6 +1,6 @@
 description: Revenus des professions non salariées
 metadata:
-  shortlabel: rpns
+  short_label: rpns
   order:
   - micro
   - microsocial
