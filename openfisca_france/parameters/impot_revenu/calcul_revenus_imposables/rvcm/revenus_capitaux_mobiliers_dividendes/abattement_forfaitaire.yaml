@@ -13,7 +13,7 @@ values:
   2006-01-01:
     value: 1525
   2012-01-01:
-    value: 0
+    value: null
 metadata:
   ipp_csv_id: abt_rcm
   unit: currency
