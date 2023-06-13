@@ -11,6 +11,7 @@ metadata:
   order:
   - accueil_personne_agee
   - pensions_alimentaires
+  - cinema
   - versements_perp
   - acquisition_navire
   - navires_de_commerce
