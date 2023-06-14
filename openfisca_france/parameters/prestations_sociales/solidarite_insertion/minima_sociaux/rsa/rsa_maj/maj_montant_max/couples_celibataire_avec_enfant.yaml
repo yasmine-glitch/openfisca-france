@@ -1,4 +1,4 @@
-description: Majoration du montant maximal, pour célibataires avec un enfant ou couples (en % du montant de base) - Revenu de solidarité active (RSA)
+description: Majoration du montant de base du revenu de solidarité active (RSA), pour célibataire avec un enfant ou couples (en % du montant de base)
 values:
   2009-06-01:
     value: 0.5
