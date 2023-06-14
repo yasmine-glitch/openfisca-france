@@ -21,4 +21,5 @@ metadata:
   official_journal_date:
     1996-01-01: "1996-12-31"
     2001-01-01: "2001-12-29"
-documentation: "Souscriptions de parts de copropriété de navires de commerce soumise à agrément : plaf_navirecom (à doubler pour couples mariés ou pacsés)"
+documentation: |-
+  Souscriptions de parts de copropriété de navires de commerce soumise à agrément : plaf_navirecom (à doubler pour couples mariés ou pacsés)

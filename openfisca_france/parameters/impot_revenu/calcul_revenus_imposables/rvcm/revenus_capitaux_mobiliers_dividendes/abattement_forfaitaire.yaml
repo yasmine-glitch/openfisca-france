@@ -15,6 +15,7 @@ values:
   2012-01-01:
     value: null
 metadata:
+  short_label: Abattement forfaitaire maximal
   ipp_csv_id: abt_rcm
   unit: currency
   reference:

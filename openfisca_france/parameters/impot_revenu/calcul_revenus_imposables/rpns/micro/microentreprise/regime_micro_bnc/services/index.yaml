@@ -3,5 +3,5 @@ metadata:
   order:
   - plafond
   - taux
-  reference:
-    href: https://www.ipp.eu/outils/baremes-ipp/
+documentation:
+  Abattement concernant les entrepreneurs individuels. Pour les autoentrepreneurs, voir art. 151-0 du CGI

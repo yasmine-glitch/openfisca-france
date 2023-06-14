@@ -231,11 +231,6 @@ metadata:
     2018-01-01: "2018-12-30"
     2019-01-01: "2019-12-29"
     2020-01-01: "2020-12-30"
-documentation: |-
-  Plafond frais personnes de plus de 75 ans : art. 156-II-2° ter du CGI
-  https://www.ipp.eu/baremes-ipp/impot-sur-le-revenu/calcul_revenus_imposables/charg_deduc/
-  http://bofip.impots.gouv.fr/bofip/1860-PGP.html#1860-PGP_80_027
-  https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000037671023&cidTexte=LEGITEXT000006069577
   notes:
     1999-01-01:
     - title: Investissement DOM-TOM devient investissement DOM-TOM dans le cadre d'une entreprise (à partir de revenus de 1999)
@@ -243,3 +238,8 @@ documentation: |-
     - title: À partir de l'imposition des revenus de 2004, différence entre pertes en capital souscription du 01/01/1994 = plaf_capita_soc1 et pertes en capital souscriptions à compter du 01/01/2003 = plaf_capital_soc2, le total des pertes reportés dans les deux cas ne peut excéder plaf_capital_soc2
     2006-01-01:
     - title: SOFICA et SOFIPECHE deviennent des crédits d'impôt à partir de la déclaration des revenus de 2006 (aller aux onglets SOFICA et SOFIPECHE)
+documentation: |-
+  Plafond frais personnes de plus de 75 ans : art. 156-II-2° ter du CGI
+  https://www.ipp.eu/baremes-ipp/impot-sur-le-revenu/calcul_revenus_imposables/charg_deduc/
+  http://bofip.impots.gouv.fr/bofip/1860-PGP.html#1860-PGP_80_027
+  https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000037671023&cidTexte=LEGITEXT000006069577

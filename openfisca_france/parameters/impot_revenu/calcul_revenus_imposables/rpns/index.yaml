@@ -1,6 +1,7 @@
-description: Revenus des professions non salariées
+description: Revenu des professions non salariées (RPNS)
 metadata:
-  short_label: rpns
+  short_label: Revenu des professions non salariées (RPNS)
+  documentation_start: true
   order:
   - micro
   - microsocial
