@@ -3,7 +3,6 @@ metadata:
   documentation_start: true
   label_en: Wages and pensions deductions
   order:
-  - date_entree_en_vigueur
   - abatpen
   - abatpro
   - abat_supp
