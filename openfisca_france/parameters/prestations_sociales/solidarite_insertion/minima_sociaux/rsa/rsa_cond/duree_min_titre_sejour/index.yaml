@@ -1,6 +1,6 @@
 description:  Durée minimum du titre de séjour d'un ressortissant pour bénéficier du revenu de solidarité active (RSA)
 metadata:
-  short_label: Durée minimum du titre de séjour d'un ressortissant pour bénéficier du RSA
+  short_label: Durée minimum du titre de séjour pour bénéficier du RSA
   label_en: "Active solidarity income (RSA): General conditions"
   order:
   - eee
