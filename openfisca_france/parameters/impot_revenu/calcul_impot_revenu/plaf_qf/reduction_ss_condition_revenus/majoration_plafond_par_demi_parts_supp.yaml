@@ -46,9 +46,13 @@ metadata:
     2016-01-01: "2016-12-30"
     2017-01-01: "2017-12-31"
     2018-01-01: "2018-12-30"
+    2019-01-01: "2019-12-29"
+    2020-01-01: "2020-12-30"
   notes:
     2016-01-01:
     - title: Introduction d'une réduction d'impôt sous conditon de revenus qui s'impute après la décote mais avant les réductions d'impôt classiques (art. 197-I-4 (b) du CGI)
+    2020-01-01:
+    - title: La réduction d'impôt sous condition de revenus est supprimée. La décote est étendue à l'ensemble des contribuables de la première tranche.
 documentation: |-
   Notes :
   > Création du quotient familial en 1945 (Loi 45-0195 du 31/02/1945).

@@ -1,5 +1,7 @@
 description: Enfant majeur célibataire - Plafond des avantages procurés par demi-part de Quotient Familial
 values:
+  1950-01-01:
+    value: null
   1974-01-01:
     value: 6000
   1975-01-01:
