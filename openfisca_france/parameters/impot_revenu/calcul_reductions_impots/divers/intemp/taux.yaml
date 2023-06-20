@@ -1,8 +1,9 @@
-description: Taux
 values:
-  2002-01-01:
+  1984-01-01:
     value: 0.25
-  2004-01-01:
+  2003-01-01:
     value: null
 metadata:
   unit: /1
+  reference:
+    href: https://www.ipp.eu/outils/baremes-ipp/
