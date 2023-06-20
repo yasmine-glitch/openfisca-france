@@ -1,13 +1,14 @@
-description: Actions, parts, droits ou titres détenus depuis 4 à 6 ans
+description: Actions, parts, droits ou titres détenus depuis 2 à 4 ans
 values:
   1977-01-01:
     value: null
   2013-01-01:
-    value: 0.3
+    value: 0.2
   2014-01-01:
     value: 0.5
 metadata:
-  ipp_csv_id: abat_pv_4ans
+  shortlabel : 2 à 4 ans
+  ipp_csv_id: abat_pv_2ans
   unit: /1
   notes:
     2013-01-01:
