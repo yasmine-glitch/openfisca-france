@@ -1,0 +1,9 @@
+description: Réductions d'impôts
+metadata:
+  order :
+  - enfants_scolarises
+  - outremer_investissement
+  - reduction_impot_exceptionnelle
+  - reduction_domtom
+  - investissements_immobiliers
+  - location_meublee
