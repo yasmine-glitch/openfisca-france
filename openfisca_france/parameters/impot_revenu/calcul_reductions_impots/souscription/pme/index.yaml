@@ -4,7 +4,6 @@ metadata:
   documentation_start: true
   label_en: Small Firms Capital Subscription (PME)
   order:
-  - date_entree_en_vigueur
   - emprunts_contractes_reprise_pme
 documentation: |-
   Notes :
