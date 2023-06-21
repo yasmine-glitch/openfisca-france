@@ -3,7 +3,6 @@ metadata:
   documentation_start: true
   label_en: Family quotient ceiling and "decote" (1978 - )
   order:
-  - date_entree_en_vigueur
   - decote
   - quotient_familial
   - plafond_avantages_procures_par_demi_part
@@ -18,7 +17,7 @@ documentation: |-
 
   Entre 1915 et 1947, des réductions d'impôt pour charges de famille ont été appliquées pour le calcul de l'imposition des revenus.
   > Voir Annexes C-2 et C-7 dans Thomas Piketty, Les hauts revenus en France au XXe siècle (Grasset, 2001)
- 
+
   Lors de l'imposition des revenus des années 1964-1966 et 1969-1972, les pramètres x-y sont plus élevés pour les contribuables ayant un faible nombre de parts.
   Lorsqu'il n'y a qu'un seul paramètre, les contribuables dont l'impôt est inférieur à x bénéficient d'une réduction d'impôt égale à la différence entre x et leur impôt (les contribuables dont l'impôt est inférieur à x/2 sont donc exonérés).
 

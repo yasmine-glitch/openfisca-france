@@ -3,7 +3,6 @@ metadata:
   documentation_start: true
   label_en: Taxation of capital gains
   order:
-  - date_entree_en_vigueur
   - pv_cession_valeurs_mobilieres_pv_professionnelles
   - pv_mobilieres_levees_options_attribuees_2000_2012
   - actions_gratuites

@@ -3,7 +3,6 @@ metadata:
   short_label: Compte épargne co-developpement
   label_en: Co-development Savings Account (2010 - 2011)
   order:
-  - date_entree_en_vigueur
   - taux
   - plafond_par_personne
   - plafond_en_revenu_net_global
