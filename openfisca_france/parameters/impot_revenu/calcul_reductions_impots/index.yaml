@@ -1,4 +1,13 @@
-description: Réduction d'impôt
+description: Calcul des réductions d'impôts
 metadata:
-  reference:
-    href: https://www.ipp.eu/outils/baremes-ipp/
+  label_en: Tax reductions
+  order:
+  - dons
+  - cotisations_syndicales
+  - emploi_salarie_domicile
+  - prestations_compensatoires
+  - souscription
+  - investissement_forestier
+  - compte_epargne_co_developpement
+  - accueil_dans_etablissement_personnes_agees
+  - reductions_impot

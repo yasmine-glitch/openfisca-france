@@ -1,4 +1,4 @@
-description: Seuil (à partir duquel la réduction décroît) par part pour les deux premières parts de la réduction exceptionnelle d'impôts (2013)
+description: Seuil (à partir duquel la réduction décroît) par part pour les deux premières parts de la réduction exceptionnelle d'impôts
 values:
   2012-01-01:
     value: null

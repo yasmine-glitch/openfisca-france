@@ -7,7 +7,7 @@ values:
   2012-01-01:
     value: null
 metadata:
-  short_label: Taux normal
+  short_label: Taux régime normal
   ipp_csv_id: taux_normal_reduc_invest_locnue_outremer
   unit: /1
   reference:

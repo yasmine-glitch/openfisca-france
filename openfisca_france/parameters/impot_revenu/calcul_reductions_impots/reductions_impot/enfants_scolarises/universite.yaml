@@ -1,5 +1,7 @@
 description: Réduction pour enfants scolarisés au supérieur
 values:
+  1991-01-01:
+    value: null
   1992-01-01:
     value: 1200
   2001-01-01:

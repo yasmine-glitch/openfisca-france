@@ -1,7 +1,11 @@
-description: Réductions d'impo PME (1993 -)
+description: Souscription au capital des PME
 metadata:
-  short_label: Emprunts pour reprise de PME
-  label_en: Small Firms Capital Subscription (PME) (1993 -)
+  short_label: Au capital des PME
+  documentation_start: true
+  label_en: Small Firms Capital Subscription (PME)
+  order:
+  - date_entree_en_vigueur
+  - emprunts_contractes_reprise_pme
 documentation: |-
   Notes :
   (1) Souscription au capital des PME : 1° du I de l'article 199 terdecies OA du CGI

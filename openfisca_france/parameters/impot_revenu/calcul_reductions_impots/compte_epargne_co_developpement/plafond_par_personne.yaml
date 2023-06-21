@@ -4,6 +4,8 @@ values:
     value: null
   2007-01-01:
     value: 20000
+  2009-01-01:
+    value: 20000
   2011-01-01:
     value: null
 metadata:
@@ -16,13 +18,18 @@ metadata:
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000017853368
     - title: BOI 5 B-11-08 n°28 du 04/03/2008
     - title: Loi n°2009-1673 du 30/12/2009 (LF pour 2010) - art. 89
+    2009-01-01:
+      title: Loi n°2009-1673 du 30/12/2009 (LF pour 2010) - art. 89
     2011-01-01:
       title: Loi n°2010-1657 du 29/12/2010 (LF pour 2011) - art. 107
   official_journal_date:
     2007-01-01: 2007-12-27; 2009-12-31
+    2009-01-01: "2009-12-31"
   notes:
     2007-01-01:
     - title: Avant les revenus 2009, les versements sur le compte étaient déductibles du revenu global.
+    2009-01-01:
+    - title: Avant les revenus 2009, les versements sur le compte étaient déductibles du revenu global.    
     2011-01-01:
     - title: Les comptes existants deviennent de simples comptes épargne.
 documentation: |-
@@ -37,3 +44,4 @@ documentation: |-
   à l'intégration et à l'asile - JORF n°270 du 21/11/2007
   Loi 2006-911 du 24/07/2006 - art. 1 relative à l'immigration et à l'intégration
   JORF n°170 du 25 juillet 2006
+  Le plafonnement par foyer fiscal (art. 199 sexvicies CGI) s'applique dans la limite des deux plafonds.

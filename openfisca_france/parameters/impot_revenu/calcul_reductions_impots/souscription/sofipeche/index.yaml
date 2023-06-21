@@ -1,5 +1,11 @@
-description: Réduction d'impôt pour souscriptions de parts au capital de SOFIPECHE (1999 - 2012)
+description: Souscription au capital de SOFIPECHE
 metadata:
   short_label: Sofipêche
-  label_en: Capital Subscription in SOFIPECHE (fishing firms) (1999 - 2012)
-documentation: Cette charge déductible est devenu une réduction d'impôts en 2009
+  label_en: Capital Subscription in SOFIPECHE (fishing firms)
+  order:
+  - taux
+  - plafond
+  - plafond_revenu_net_global
+  - date_entree_en_vigueur
+documentation:
+ Souscription au capital d'une SOFIPECHE : plafonnement à doubler pour couple. Cette charge déductible est devenu une réduction d'impôts en 2009

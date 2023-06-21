@@ -1,9 +1,12 @@
 description: Taux de la réduction d'impôt pour la défense des forêts contre les incendies
 values:
+  2000-01-01:
+    value: null
   2006-01-01:
     value: 0.5
 metadata:
   short_label: Taux
+  ipp_csv_id: taux_incendie
   unit: /1
   reference:
     2006-01-01:

@@ -1,14 +1,20 @@
-description: Réduction d'impôt sur les sommes versées pour l'emploi d'un salarié à domicile (1992 - 2017)
+description: Réduction d'impôt sur les sommes versées pour l'emploi d'un salarié à domicile
 metadata:
-  label_en: Home-worker Employment (1992 - 2017)
+  documentation_start: true
+  label_en: Home-worker Employment
   order:
   - taux
   - plafond
   - increment_plafond
   - plafond_maximum
   - plafond_1ere_annee
+  - plafond_invalides_1ere_annee
   - plafond_invalides
 documentation: |-
+  Dépenses de services à la personne à domicile : art. 199 sexdecies du CGI
+  Le travail peut être effectué par un salarié directement employé à domicile, une association, une entreprise ou un organisme spécialisé ou encore un organisme à but non lucratif ayant pour objet l'aide à domicile et habilité au titre de l'aide sociale ou conventionné par un organisme de sécurité sociale.
+  Si les contribuables bénéficiaires bénéficient aussi de l'allocation personnalisée d'autonomie (APA), le montant perçu au titre de cette allocation doit être retranché aux dépenses servant de base pour le calcul de la réduction d'impôt.
+  Certains services à domicile rentrent dans le calcul des dépenses annuelles jusqu'à un certain plafond. Ainsi, les dépenses en petit bricolage ne peuvent dépasser 500 euros par an, les petits travaux de jardinage 5000 euros et l'assistance informatique ou Internet est plafonnée à 3000 euros annuels.
   Notes :
   (1) Dépenses de services à la personne à domicile : art. 199 sexdecies du CGI
   (2) Le travail peut être effectué par un salarié directement employé à domicile, une association, une entreprise ou un organisme spécialisé ou encore un organisme à but non lucratif ayant pour objet l'aide à domicile et habilité au titre de l'aide sociale ou conventionné par un organisme de sécurité sociale.
