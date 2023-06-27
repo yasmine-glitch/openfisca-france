@@ -1,0 +1,9 @@
+description: Allocation unique dégressive des allocations d'assurance chômage
+metadata:
+  short_label: Allocation unique dégressive
+  label_en: UI scheme - degressive schedule
+  order:
+  - taux_plein
+  - taux_degressif
+  - duree_totale_en_mois
+  - coefficient_degressivite

@@ -1,0 +1,9 @@
+description: Calcul de la décote de l'impôt de solidarité sur la fortune
+metadata:
+  short_label: Calcul de la décote
+  label_en: "\"Décote\" computation"
+  order:
+  - parametre_calcul_decote
+  - borne_inferieure_decote
+  - borne_superieure_decote
+  - taux_decote

@@ -15,12 +15,12 @@ def ayrault_muet_modify_parameters(parameters):
         inflator = inflator * (1 + inflation / 100)
     del inflation
 
-    elig1 = Parameter('elig1', {'values': {"2015-01-01": {'value': round(16251 * inflator)}, "2016-01-01": {'value': None}}})
-    elig2 = Parameter('elig2', {'values': {"2015-01-01": {'value': round(32498 * inflator)}, "2016-01-01": {'value': None}}})
-    elig3 = Parameter('elig3', {'values': {"2015-01-01": {'value': round(4490 * inflator)}, "2016-01-01": {'value': None}}})
-    parameters.impot_revenu.credits_impot.ppe.add_child('elig1', elig1)
-    parameters.impot_revenu.credits_impot.ppe.add_child('elig2', elig2)
-    parameters.impot_revenu.credits_impot.ppe.add_child('elig3', elig3)
+    elig1 = Parameter('elig1', {'values': {'2015-01-01': {'value': round(16251 * inflator)}, '2016-01-01': {'value': None}}})
+    elig2 = Parameter('elig2', {'values': {'2015-01-01': {'value': round(32498 * inflator)}, '2016-01-01': {'value': None}}})
+    elig3 = Parameter('elig3', {'values': {'2015-01-01': {'value': round(4490 * inflator)}, '2016-01-01': {'value': None}}})
+    parameters.impot_revenu.credits_impots.ppe.add_child('elig1', elig1)
+    parameters.impot_revenu.credits_impots.ppe.add_child('elig2', elig2)
+    parameters.impot_revenu.credits_impots.ppe.add_child('elig3', elig3)
     return parameters
 
 
@@ -35,7 +35,7 @@ class variator(Variable):
 class reduction_csg(Variable):
     value_type = float
     entity = Individu
-    label = "Réduction dégressive de CSG"
+    label = 'Réduction dégressive de CSG'
     definition_period = YEAR
 
     def formula_2015_01_01(individu, period, parameters):
@@ -58,7 +58,7 @@ class reduction_csg(Variable):
 
 class reduction_csg_foyer_fiscal(Variable):
     entity = FoyerFiscal
-    label = "Réduction dégressive de CSG des memebres du foyer fiscal"
+    label = 'Réduction dégressive de CSG des memebres du foyer fiscal'
     value_type = float
     definition_period = YEAR
 
@@ -70,7 +70,7 @@ class reduction_csg_foyer_fiscal(Variable):
 class reduction_csg_nette(Variable):
     value_type = float
     entity = Individu
-    label = "Réduction dégressive de CSG"
+    label = 'Réduction dégressive de CSG'
     definition_period = YEAR
 
     def formula_2015_01_01(individu, period):
@@ -82,7 +82,7 @@ class reduction_csg_nette(Variable):
 class ppe_elig_bis(Variable):
     value_type = bool
     entity = FoyerFiscal
-    label = "ppe_elig_bis"
+    label = 'ppe_elig_bis'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):
@@ -97,16 +97,16 @@ class ppe_elig_bis(Variable):
         celibataire_ou_divorce = foyer_fiscal('celibataire_ou_divorce', period)
         nbptr = foyer_fiscal('nbptr', period)
         variator = foyer_fiscal('variator', period)
-        ppe = parameters(period).impot_revenu.credits_impot.ppe
-        seuil = (veuf | celibataire_ou_divorce) * (ppe.eligi1 + 2 * max_(nbptr - 1, 0) * ppe.eligi3) \
-            + maries_ou_pacses * (ppe.eligi2 + 2 * max_(nbptr - 2, 0) * ppe.eligi3)
+        ppe = parameters(period).impot_revenu.credits_impots.ppe
+        seuil = (veuf | celibataire_ou_divorce) * (ppe.seuils_rfr_eligibilite.personne_seule + 2 * max_(nbptr - 1, 0) * ppe.seuils_rfr_eligibilite.increment_par_demi_part)\
+            + maries_ou_pacses * (ppe.seuils_rfr_eligibilite.couple_marie_pacse + 2 * max_(nbptr - 2, 0) * ppe.seuils_rfr_eligibilite.increment_par_demi_part)
         return (rfr * ppe_coef) <= (seuil * variator)
 
 
 class regularisation_reduction_csg(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Régularisation complète réduction dégressive de CSG"
+    label = 'Régularisation complète réduction dégressive de CSG'
     definition_period = YEAR
 
     def formula_2015_01_01(foyer_fiscal, period, parameters):

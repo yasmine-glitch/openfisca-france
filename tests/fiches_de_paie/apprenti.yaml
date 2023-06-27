@@ -11,7 +11,7 @@ input:
   contrat_de_travail: temps_plein
   # contrat_de_travail_debut:
   # contrat_de_travail_fin:
-  # contrat_de_travail_duree: cdi
+  # contrat_de_travail_type: cdi
   effectif_entreprise: 6
   heures_non_remunerees_volume: 0
   heures_remunerees_volume: 0
@@ -24,7 +24,7 @@ input:
   prevoyance_obligatoire_cadre_taux_employeur: 0.015  # 1.5% est le minimum
   primes_salaires: 0
   prise_en_charge_employeur_retraite_complementaire: 0
-  prise_en_charge_employeur_prevoyance_complementaire: 0
+  prevoyance_complementaire_employeur: 0
   prise_en_charge_employeur_retraite_supplementaire: 0
   ratio_alternants: 0
   redevable_taxe_apprentissage: 0
@@ -53,11 +53,11 @@ output:
   vieillesse_plafonnee_employeur: -60.71
   fonds_emploi_hospitalier: 0
   ircantec_employeur: 0
-  pension_civile_employeur: 0
+  pension_employeur: 0
   rafp_employeur: 0
   #
   # # cotisations_employeur_non_contributives: 0
-  allocations_temporaires_invalidite: 0
+  ati_atiacl: 0
   accident_du_travail: -10.71
   famille: -37.49
   mmid_employeur: -91.42
@@ -70,7 +70,7 @@ output:
   contribution_supplementaire_apprentissage: 0
   financement_organisations_syndicales: -.11  # -35 * 52 * 9.61 * 0.49 / 12 * 0.00016
   formation_professionnelle: -3.93
-  fnal: -.71
+  fnal: -.714
   participation_effort_construction: 0 # was incorrectly : -3.21
   prevoyance_obligatoire_cadre: 0
   taxe_apprentissage: 0
@@ -81,7 +81,7 @@ output:
   forfait_social: 0
   tehr: {'2014': 0}
   assiette_cotisations_sociales: 35 * 52 * 9.61 * 0.49 / 12
-  cotisations_employeur: -2.14 -8.57 -33.21 -28.57 -12.86 -60.71 -10.71 -37.49 -91.42 -2.14 -3.93 -.71 -.11
+  cotisations_employeur: -2.14 -8.57 -33.21 -28.57 -12.86 -60.71 -10.71 -37.49 -91.42 -2.14 -3.93 -.714 -.11
   exoneration_cotisations_employeur_apprenti: 281.86
 
   #
@@ -101,14 +101,13 @@ output:
   vieillesse_deplafonnee_salarie: -2.14
   vieillesse_plafonnee_salarie: -48.92
   ircantec_salarie: 0
-  pension_civile_salarie: 0
+  pension_salarie: 0
   rafp_salarie: 0
   #
   # cotisations_salariales_non_contributives: 0
   mmid_salarie: -5.36
   # contribution_exceptionnelle_solidarite: 0
   csg_deductible_salaire: 0
-  mhsup: 0
   # salaire_net: 0
 
   # salaire imposable

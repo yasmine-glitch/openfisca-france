@@ -1,8 +1,8 @@
-from numpy import logical_or as or_
+from numpy import datetime64, logical_or as or_
+
+from openfisca_core.periods import Period
 
 from openfisca_france.model.base import *
-
-from numpy import datetime64
 
 
 class autonomie_financiere(Variable):
@@ -10,6 +10,7 @@ class autonomie_financiere(Variable):
     entity = Individu
     label = "Indicatrice d'autonomie financière vis-à-vis des prestations familiales"
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
     reference = [
         'https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000006750602&cidTexte=LEGITEXT000006073189',
         'https://www.service-public.fr/particuliers/vosdroits/F16947'
@@ -17,21 +18,22 @@ class autonomie_financiere(Variable):
 
     def formula(individu, period, parameters):
         # D'après service-public.fr, la condition de dépassement du salaire plafonds n'est pas évalué de la même manière suivant si l'enfant est étudiant ou salarié/apprenti/stagiaire.
-        salaire_net_mensualise = individu('salaire_net', period.start.period('month', 6).offset(-6), options = [ADD]) / 6
+        salaire_net_mensualise = individu('salaire_net', Period(('month', period.start, 6)).offset(-6), options = [ADD]) / 6
 
         _P = parameters(period)
 
         nbh_travaillees = 169
-        smic_mensuel_brut = _P.cotsoc.gen.smic_h_b * nbh_travaillees
+        smic_mensuel_brut = _P.marche_travail.salaire_minimum.smic.smic_b_horaire * nbh_travaillees
 
-        return salaire_net_mensualise >= (_P.prestations.prestations_familiales.af.seuil_rev_taux * smic_mensuel_brut)
+        return salaire_net_mensualise >= (_P.prestations_sociales.prestations_familiales.def_pac.revenu_plafond_pac_non_scolaire * smic_mensuel_brut)
 
 
 class prestations_familiales_enfant_a_charge(Variable):
     value_type = bool
     entity = Individu
-    label = "Enfant considéré à charge au sens des prestations familiales"
+    label = 'Enfant considéré à charge au sens des prestations familiales'
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula(individu, period, parameters):
         est_enfant_dans_famille = individu('est_enfant_dans_famille', period)
@@ -39,17 +41,17 @@ class prestations_familiales_enfant_a_charge(Variable):
         age = individu('age', period)
         rempli_obligation_scolaire = individu('rempli_obligation_scolaire', period)
 
-        pfam = parameters(period).prestations.prestations_familiales
+        pfam = parameters(period).prestations_sociales.prestations_familiales
 
         condition_enfant = (
-            (age >= pfam.enfants.age_minimal)
-            * (age < pfam.enfants.age_intermediaire)
+            (age >= pfam.def_pac.enfants.age_minimal)
+            * (age < pfam.def_pac.enfants.age_intermediaire)
             * rempli_obligation_scolaire
             )
 
         condition_jeune = (
-            (age >= pfam.enfants.age_intermediaire)
-            * (age < pfam.enfants.age_limite)
+            (age >= pfam.def_pac.enfants.age_intermediaire)
+            * (age < pfam.def_pac.enfants.age_limite)
             * not_(autonomie_financiere)
             )
 
@@ -60,8 +62,9 @@ class prestations_familiales_base_ressources_individu(Variable):
     value_type = float
     is_period_size_independent = True
     entity = Individu
-    label = "Base ressource individuelle des prestations familiales"
+    label = 'Base ressource individuelle des prestations familiales'
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula(individu, period):
         annee_fiscale_n_2 = period.n_2
@@ -70,20 +73,19 @@ class prestations_familiales_base_ressources_individu(Variable):
         hsup = individu('hsup', annee_fiscale_n_2, options = [ADD])
         glo = individu('glo', annee_fiscale_n_2)
         plus_values = individu.foyer_fiscal('assiette_csg_plus_values', annee_fiscale_n_2) * individu.has_role(FoyerFiscal.DECLARANT_PRINCIPAL)
-        rpns = individu('rpns', annee_fiscale_n_2)
+        rpns = individu('rpns_imposables', annee_fiscale_n_2)
         rpns_pvce = individu('rpns_pvce', annee_fiscale_n_2)
-        rpns_pvct = individu('rpns_pvct', annee_fiscale_n_2)
-        rpns_mvct = individu('moins_values_court_terme_non_salaries', annee_fiscale_n_2)
-        rpns_mvlt = individu('moins_values_long_terme_non_salaries', annee_fiscale_n_2)
+        rpns_exon = individu('rpns_exon', annee_fiscale_n_2)
 
-        return traitements_salaires_pensions_rentes + hsup + glo + plus_values + rpns + rpns_pvce + rpns_pvct - rpns_mvct - rpns_mvlt
+        return traitements_salaires_pensions_rentes + hsup + glo + plus_values + rpns + rpns_pvce + rpns_exon
 
 
 class biactivite(Variable):
     value_type = bool
     entity = Famille
-    label = "Indicatrice de biactivité"
+    label = 'Indicatrice de biactivité'
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula(famille, period, parameters):
         '''
@@ -102,11 +104,11 @@ class biactivite(Variable):
         '''
         annee_fiscale_n_2 = period.n_2
 
-        pfam = parameters(annee_fiscale_n_2).prestations.prestations_familiales
-        seuil_rev = 12 * pfam.af.bmaf
+        bmaf = parameters(annee_fiscale_n_2).prestations_sociales.prestations_familiales.bmaf.bmaf
+        seuil_rev = 12 * bmaf
 
         condition_ressource = (
-            famille.members('rpns_individu', annee_fiscale_n_2)
+            famille.members('rpns_imposables', annee_fiscale_n_2)
             + famille.members('revenu_assimile_salaire_apres_abattements', annee_fiscale_n_2)
             >= seuil_rev
             )
@@ -118,7 +120,7 @@ class biactivite(Variable):
 class rev_coll(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Revenus perçus par le foyer fiscal à prendre en compte dans la base ressource des prestations familiales"
+    label = 'Revenus perçus par le foyer fiscal à prendre en compte dans la base ressource des prestations familiales'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period):
@@ -139,7 +141,7 @@ class rev_coll(Variable):
 
         # TODO: ajouter les revenus de l'étranger etr*0.9
         return (
-            + revenu_categoriel_foncier
+            revenu_categoriel_foncier
             + pensions_alimentaires_versees  # négatif
             + rente_viagere_titre_onereux_net
             + rev_cat_rvcm
@@ -157,12 +159,13 @@ class rev_coll(Variable):
 class prestations_familiales_base_ressources_communes(Variable):
     value_type = float
     entity = Famille
-    label = "Ressources non individualisables prises en compte pour les prestations familiales"
+    label = 'Ressources non individualisables prises en compte pour les prestations familiales'
     reference = [
-        "Article D521-4 du Code de la sécurité sociale",
-        "https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000030678081&cidTexte=LEGITEXT000006073189&categorieLien=id"
+        'Article D521-4 du Code de la sécurité sociale',
+        'https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000030678081&cidTexte=LEGITEXT000006073189&categorieLien=id'
         ]
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula(famille, period):
         annee_fiscale_n_2 = period.n_2
@@ -183,12 +186,13 @@ class prestations_familiales_base_ressources_communes(Variable):
 class prestations_familiales_base_ressources(Variable):
     value_type = float
     entity = Famille
-    label = "Base ressource des prestations familiales"
+    label = 'Base ressource des prestations familiales'
     reference = [
-        "Article D521-4 du Code de la sécurité sociale",
-        "https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000030678081&cidTexte=LEGITEXT000006073189&categorieLien=id"
+        'Article D521-4 du Code de la sécurité sociale',
+        'https://www.legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000030678081&cidTexte=LEGITEXT000006073189&categorieLien=id'
         ]
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula(famille, period):
         base_ressources_i = famille.members('prestations_familiales_base_ressources_individu', period)
@@ -208,9 +212,9 @@ class prestations_familiales_base_ressources(Variable):
 
 
 def nb_enf(famille, period, age_min, age_max):
-    """
+    '''
     Renvoie le nombre d'enfant au sens des allocations familiales dont l'âge est compris entre ag1 et ag2
-    """
+    '''
 
     assert period.unit == 'month'
     assert period.size == 1
@@ -235,10 +239,10 @@ def nb_enf(famille, period, age_min, age_max):
 class abattements_speciaux_prestations_familiales(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Abattements spéciaux concernant les personnes agées ou invalides et les enfants à charge"
+    label = 'Abattements spéciaux concernant les personnes agées ou invalides et les enfants à charge'
     reference = [
-        "http://bofip.impots.gouv.fr/bofip/2036-PGP",
-        "https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000002185185"
+        'http://bofip.impots.gouv.fr/bofip/2036-PGP',
+        'https://www.legifrance.gouv.fr/jorf/article_jo/JORFARTI000002185185'
         ]
     definition_period = YEAR
 
@@ -267,7 +271,7 @@ class abattements_speciaux_prestations_familiales(Variable):
         nombre_enfants = foyer_fiscal('nbN', period)
 
         # Abattements pour revenu net imposable
-        abattements = parameters(period).impot_revenu.abattements_rni
+        abattements = parameters(period).impot_revenu.calcul_revenus_imposables.abat_rni
 
         # Abattement pour personnes agées de + de 65 ans ou invalide
         abattement_age_ou_invalidite = abattements.personne_agee_ou_invalide
@@ -277,22 +281,22 @@ class abattements_speciaux_prestations_familiales(Variable):
 
         # Vecteur de foyers eligibles aux abattements spéciaux
         foyers_eligibles = (
-            + (((date_naissance_declarant < dateLimite) | declarant_invalide) & (age_declarant > 0))
+            (((date_naissance_declarant < dateLimite) | declarant_invalide) & (age_declarant > 0))
             + (((date_naissance_conjoint < dateLimite) | conjoint_invalide) & (age_conjoint > 0))
             )
 
         # Vecteur de montants d'abattement pour personnes âges ou invalides
         abattement_special_personne_agee_invalide = (
-            + foyers_eligibles
+            foyers_eligibles
             * (
                 (
-                    + abattement_age_ou_invalidite.montant_1
+                    abattement_age_ou_invalidite.montant_1
                     * (revenu_net_global <= abattement_age_ou_invalidite.plafond_1)
                     )
                 + (
-                    + abattement_age_ou_invalidite.montant_2
+                    abattement_age_ou_invalidite.montant_2
                     * (
-                        + (revenu_net_global > abattement_age_ou_invalidite.plafond_1)
+                        (revenu_net_global > abattement_age_ou_invalidite.plafond_1)
                         & (revenu_net_global <= abattement_age_ou_invalidite.plafond_2)
                         )
                     )
@@ -301,7 +305,7 @@ class abattements_speciaux_prestations_familiales(Variable):
 
         # Vecteur de montants d'abattement pour enfants à charge
         abattement_special_enfants_a_charge = (
-            + nombre_enfants
+            nombre_enfants
             * abattement_enfant_marie.montant
             )
 

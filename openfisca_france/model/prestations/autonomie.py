@@ -1,3 +1,5 @@
+from openfisca_core.periods import Period
+
 from openfisca_france.model.base import *
 
 
@@ -24,23 +26,24 @@ class apa_domicile_participation(Variable):
     label = "Participation du bénéficiaire de l'APA à domicile en euros"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula_2002(individu, period, parameters):
         # Les départements doivent appliquer la nouvelle formule
         # entre le 1er mars 2016 et le 28 février 2017
         base_ressources_apa = individu('base_ressources_apa', period)
         en_couple = individu.famille('en_couple', period)
-        autonomie = parameters(period).autonomie
-        seuil_inf = autonomie.apa_domicile.seuil_de_revenu_en_part_du_mtp.seuil_inferieur
-        seuil_sup = autonomie.apa_domicile.seuil_de_revenu_en_part_du_mtp.seuil_superieur
-        majoration_tierce_personne = autonomie.mtp.mtp
-        taux_min_participation = autonomie.apa_domicile.taux_de_participation_minimum
-        taux_max_participation = autonomie.apa_domicile.taux_de_participation_maximum
+        autonomie = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
+        seuil_inf = autonomie.apa_domicile.seuil_revenu_en_part_mtp.seuil_inferieur
+        seuil_sup = autonomie.apa_domicile.seuil_revenu_en_part_mtp.seuil_superieur
+        majoration_tierce_personne = autonomie.mtp
+        taux_min_participation = autonomie.apa_domicile.taux_de_participation.minimum
+        taux_max_participation = autonomie.apa_domicile.taux_de_participation.maximum
 
         proratisation_couple = (
             1
             + en_couple
-            * (autonomie.apa_domicile.divison_des_ressources_du_menage_pour_les_couples - 1)
+            * (autonomie.apa_domicile.division_ressources_menage_couples - 1)
             )
 
         dependance_plan_aide_domicile_accepte = individu('dependance_plan_aide_domicile_accepte', period)
@@ -66,13 +69,13 @@ class apa_domicile_participation(Variable):
         base_ressources_apa = individu('base_ressources_apa', period)
         en_couple = individu.famille('en_couple', period)
         dependance_plan_aide_domicile_accepte = individu('dependance_plan_aide_domicile_accepte', period)
-        parameters = parameters(period).autonomie
-        majoration_tierce_personne = parameters.mtp.mtp
+        parameters = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
+        majoration_tierce_personne = parameters.mtp
 
         proratisation_couple = (
             1
             + en_couple
-            * (parameters.apa_domicile.divison_des_ressources_du_menage_pour_les_couples - 1)
+            * (parameters.apa_domicile.division_ressources_menage_couples - 1)
             )
 
         base_ressources_apa_domicile = base_ressources_apa / proratisation_couple
@@ -129,12 +132,13 @@ class apa_eligibilite(Variable):
     entity = Individu
     label = "Allocation personalisée d'autonomie - Éligibilité"
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula_2002(individu, period, parameters):
-        period = period.start.offset('first-of', 'month').period('month')
-        parameters = parameters(period).autonomie
+        period = Period(('month', period.start.offset('first-of', 'month'), 1))
+        parameters = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
         age = individu('age', period)
-        apa_age_min = parameters.age_ouverture_des_droits.age_d_ouverture_des_droits
+        apa_age_min = parameters.apa_domicile.condition_age
 
         gir = individu('gir', period)
         eligibilite_gir = (
@@ -152,6 +156,7 @@ class apa_domicile_taux_participation(Variable):
     label = "Taux de participation du bénéficiaire à l'APA à domicile"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula_2002(individu, period, parameters):
         apa_domicile = individu('apa_domicile', period)
@@ -166,12 +171,14 @@ class apa_domicile(Variable):
     label = "Allocation personalisée d'autonomie"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula_2002(individu, period, parameters):
-        period = period.start.offset('first-of', 'month').period('month')
-        parameters = parameters(period).autonomie
+        period = Period(('month', period.start.offset('first-of', 'month'), 1))
+        apa_domicile = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees.apa_domicile
         apa_eligibilite = individu('apa_eligibilite', period)
-        seuil_non_versement = parameters.seuil_de_versement_de_l_apa.seuil_versement.seuil_de_versement_de_l_apa
+        smic_brut_horaire = parameters(period).marche_travail.salaire_minimum.smic.smic_b_horaire
+        seuil_non_versement = apa_domicile.seuil_versement_en_part_smic_brut_horaire * smic_brut_horaire
         dependance_plan_aide_domicile_accepte = individu('dependance_plan_aide_domicile_accepte', period)
 
         apa_domicile_participation = individu('apa_domicile_participation', period)
@@ -185,12 +192,13 @@ class apa_etablissement(Variable):
     label = "Allocation personalisée d'autonomie en institution"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula_2002(individu, period, parameters):
-        period = period.start.offset('first-of', 'month').period('month')
-        parameters = parameters(period).autonomie
-        seuil_non_versement = parameters.seuil_de_versement_de_l_apa.seuil_versement.seuil_de_versement_de_l_apa
-
+        period = Period(('month', period.start.offset('first-of', 'month'), 1))
+        perte_autonomie_personnes_agees = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
+        smic_brut_horaire = parameters(period).marche_travail.salaire_minimum.smic.smic_b_horaire
+        seuil_non_versement = perte_autonomie_personnes_agees.apa_institution.seuil_versement_en_part_smic_brut_horaire * smic_brut_horaire
         en_couple = individu.famille('en_couple', period)
         apa_eligibilite = individu('apa_eligibilite', period)
         gir = individu('gir', period)  # noqa F841
@@ -199,15 +207,15 @@ class apa_etablissement(Variable):
         proratisation_couple_etablissement = (
             1
             + en_couple
-            * (parameters.apa_institution.divison_des_ressources_du_menage_pour_les_couples - 1)
+            * (perte_autonomie_personnes_agees.apa_institution.division_ressources_menage_couples - 1)
             )
 
         base_ressources_apa_etablissement = base_ressources_apa / proratisation_couple_etablissement
         dependance_tarif_etablissement_gir_5_6 = individu('dependance_tarif_etablissement_gir_5_6', period)
         dependance_tarif_etablissement_gir_dependant = individu('dependance_tarif_etablissement_gir_dependant', period)
-        seuil_inf_inst = parameters.apa_institution.seuil_de_revenu_en_part_du_mtp.seuil_inferieur
-        seuil_sup_inst = parameters.apa_institution.seuil_de_revenu_en_part_du_mtp.seuil_superieur
-        majoration_tierce_personne = parameters.mtp.mtp
+        seuil_inf_inst = perte_autonomie_personnes_agees.apa_institution.seuil_inferieur
+        seuil_sup_inst = perte_autonomie_personnes_agees.apa_institution.seuil_superieur
+        majoration_tierce_personne = perte_autonomie_personnes_agees.mtp
 
         conditions_ressources = [
             base_ressources_apa_etablissement <= seuil_inf_inst * majoration_tierce_personne,
@@ -232,7 +240,7 @@ class apa_etablissement(Variable):
             ]
 
         participation_beneficiaire = select(conditions_ressources, participations)
-        taux_reste_a_vivre = parameters.apa_institution.taux_reste_a_vivre
+        taux_reste_a_vivre = perte_autonomie_personnes_agees.apa_institution.taux_reste_a_vivre
         participation_beneficiaire = min_(
             participation_beneficiaire,
             max_(base_ressources_apa_etablissement * (1 - taux_reste_a_vivre), 0)
@@ -248,13 +256,13 @@ class apa_etablissement(Variable):
 
 class TypesGir(Enum):
     __order__ = 'non_defini gir_1 gir_2 gir_3 gir_4 gir_5 gir_6'  # Needed to preserve the enum order in Python 2
-    non_defini = "Non défini"
-    gir_1 = "Gir 1"
-    gir_2 = "Gir 2"
-    gir_3 = "Gir 3"
-    gir_4 = "Gir 4"
-    gir_5 = "Gir 5"
-    gir_6 = "Gir 6"
+    non_defini = 'Non défini'
+    gir_1 = 'Gir 1'
+    gir_2 = 'Gir 2'
+    gir_3 = 'Gir 3'
+    gir_4 = 'Gir 4'
+    gir_5 = 'Gir 5'
+    gir_6 = 'Gir 6'
 
 
 class gir(Variable):
@@ -264,6 +272,7 @@ class gir(Variable):
     entity = Individu
     label = "Groupe iso-ressources de l'individu"
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
 
 class dependance_plan_aide_domicile(Variable):
@@ -271,6 +280,7 @@ class dependance_plan_aide_domicile(Variable):
     entity = Individu
     label = "Coût du plan d'aide à domicile pour une personne dépendante"
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
 
 class dependance_tarif_etablissement_gir_1_2(Variable):
@@ -278,6 +288,7 @@ class dependance_tarif_etablissement_gir_1_2(Variable):
     entity = Individu
     label = "Tarif dépendance de l'établissement pour les GIR 1 et 2"
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
 
 class dependance_tarif_etablissement_gir_3_4(Variable):
@@ -285,6 +296,7 @@ class dependance_tarif_etablissement_gir_3_4(Variable):
     entity = Individu
     label = "Tarif dépendance de l'établissement pour les GIR 3 et 4"
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
 
 class dependance_tarif_etablissement_gir_5_6(Variable):
@@ -292,19 +304,21 @@ class dependance_tarif_etablissement_gir_5_6(Variable):
     entity = Individu
     label = "Tarif dépendance de l'établissement pour les GIR 5 et 6"
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
 
 class dependance_tarif_etablissement_gir_dependant(Variable):
     value_type = float
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
     label = "Tarif dépendance de l'établissement pour le GIR de la personne dépendante"
-    reference = ["https://www.service-public.fr/particuliers/vosdroits/F10009"]
+    reference = ['https://www.service-public.fr/particuliers/vosdroits/F10009']
 
     def formula_2002(individu, period):
-        gir = individu("gir", period)
-        tarif_gir_1_2 = individu("dependance_tarif_etablissement_gir_1_2", period)
-        tarif_gir_3_4 = individu("dependance_tarif_etablissement_gir_3_4", period)
+        gir = individu('gir', period)
+        tarif_gir_1_2 = individu('dependance_tarif_etablissement_gir_1_2', period)
+        tarif_gir_3_4 = individu('dependance_tarif_etablissement_gir_3_4', period)
 
         # Vérifie si l'individu est rattaché à l'un des groupes 1 à 4 de la grille Aggir
         gir_1_2 = (gir == TypesGir.gir_1) + (gir == TypesGir.gir_2)
@@ -319,13 +333,14 @@ class apa_urgence_domicile(Variable):
     label = "Allocation personalisée d'autonomie d'urgence à domicile"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula_2002(individu, period, parameters):
         period = period.first_month
-        autonomie = parameters(period).autonomie
-        majoration_tierce_personne = autonomie.mtp.mtp
-        plafond_gir1 = autonomie.apa_domicile.plafond_de_l_apa_a_domicile_en_part_du_mtp.gir_1
-        part_urgence_domicile = autonomie.apa_domicile.apa_d_urgence.part_du_plafond_de_l_apa_a_domicile
+        autonomie = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
+        majoration_tierce_personne = autonomie.mtp
+        plafond_gir1 = autonomie.apa_domicile.plafond_apa_domicile_en_part_mtp.gir_1
+        part_urgence_domicile = autonomie.apa_domicile.part_plafond_apa_domicile
         return part_urgence_domicile * plafond_gir1 * majoration_tierce_personne
 
 
@@ -334,11 +349,12 @@ class apa_urgence_institution(Variable):
     label = "Allocation personalisée d'autonomie en institution"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula_2002(individu, period, parameters):
-        period = period.start.offset('first-of', 'month').period('month')
+        period = Period(('month', period.start.offset('first-of', 'month'), 1))
         dependance_tarif_etablissement_gir_1_2 = individu('dependance_tarif_etablissement_gir_1_2', period)
-        part_urgence_institution = parameters(period).autonomie.apa_institution.apa_d_urgence.part_du_tarif_dependance_gir_1_2_de_l_etablissement_d_accueil
+        part_urgence_institution = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees.apa_institution.part_tarif_dependance
         apa_urgence_institution = part_urgence_institution * dependance_tarif_etablissement_gir_1_2
         return apa_urgence_institution
 
@@ -348,6 +364,7 @@ class dependance_plan_aide_domicile_accepte(Variable):
     label = "Coût du plan d'aide plafonné pris en compte pour la détermination de l'APA"
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
     reference = [
         # Code de l'action sociale et des familles - Article R232-10-1
         'https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=4D213136F764CDAC77B33F705B4DE178.tplgfr41s_1?idArticle=LEGIARTI000032133764&cidTexte=LEGITEXT000006074069&dateTexte=20170929&categorieLien=id&oldAction=&nbResultRech='
@@ -356,13 +373,13 @@ class dependance_plan_aide_domicile_accepte(Variable):
     def formula_2002(individu, period, parameters):
         gir = individu('gir', period)
         dependance_plan_aide_domicile = individu('dependance_plan_aide_domicile', period)
-        parameters_autonomie = parameters(period).autonomie
+        parameters_autonomie = parameters(period).prestations_sociales.prestations_etat_de_sante.perte_autonomie_personnes_agees
 
-        plafond_gir1 = parameters_autonomie.apa_domicile.plafond_de_l_apa_a_domicile_en_part_du_mtp.gir_1
-        plafond_gir2 = parameters_autonomie.apa_domicile.plafond_de_l_apa_a_domicile_en_part_du_mtp.gir_2
-        plafond_gir3 = parameters_autonomie.apa_domicile.plafond_de_l_apa_a_domicile_en_part_du_mtp.gir_3
-        plafond_gir4 = parameters_autonomie.apa_domicile.plafond_de_l_apa_a_domicile_en_part_du_mtp.gir_4
-        majoration_tierce_personne = parameters_autonomie.mtp.mtp
+        plafond_gir1 = parameters_autonomie.apa_domicile.plafond_apa_domicile_en_part_mtp.gir_1
+        plafond_gir2 = parameters_autonomie.apa_domicile.plafond_apa_domicile_en_part_mtp.gir_2
+        plafond_gir3 = parameters_autonomie.apa_domicile.plafond_apa_domicile_en_part_mtp.gir_3
+        plafond_gir4 = parameters_autonomie.apa_domicile.plafond_apa_domicile_en_part_mtp.gir_4
+        majoration_tierce_personne = parameters_autonomie.mtp
 
         condition_plafond_par_gir = [
             gir == TypesGir.gir_1,

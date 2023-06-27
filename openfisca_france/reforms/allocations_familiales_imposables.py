@@ -17,7 +17,7 @@ class allocations_familiales_imposables(Reform):
     name = 'Allocations familiales imposables'
 
     class rbg(Variable):
-        label = "Nouveau revenu brut global intégrant les allocations familiales"
+        label = 'Nouveau revenu brut global intégrant les allocations familiales'
         definition_period = YEAR
 
         def formula(foyer_fiscal, period, parameters):
@@ -29,7 +29,7 @@ class allocations_familiales_imposables(Reform):
             nbic_impm_i = foyer_fiscal.members('nbic_impm', period)
 
             revenu_categoriel = foyer_fiscal('revenu_categoriel', period)
-            cga = parameters(period).impot_revenu.rpns.cga_taux2
+            cga = parameters(period).impot_revenu.calcul_revenus_imposables.rpns.cga_taux2
 
             nacc_pvce = foyer_fiscal.sum(nacc_pvce_i)
             return max_(
@@ -43,7 +43,7 @@ class allocations_familiales_imposables(Reform):
                 )
 
     class rfr(Variable):
-        label = "Nouveau revenu fiscal de référence intégrant les allocations familiales"
+        label = 'Nouveau revenu fiscal de référence intégrant les allocations familiales'
         definition_period = YEAR
 
         def formula(foyer_fiscal, period, parameters):
@@ -80,7 +80,7 @@ class allocations_familiales_imposables(Reform):
     class allocations_familiales_imposables(Variable):
         value_type = float
         entity = FoyerFiscal
-        label = "Allocations familiales imposables"
+        label = 'Allocations familiales imposables'
         definition_period = YEAR
 
         def formula(foyer_fiscal, period, parameters):

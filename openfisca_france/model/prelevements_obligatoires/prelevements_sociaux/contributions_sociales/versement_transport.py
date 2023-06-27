@@ -10,7 +10,7 @@ from openfisca_france.france_taxbenefitsystem import COUNTRY_DIR
 class taux_versement_transport(Variable):
     value_type = float
     entity = Individu
-    label = ""
+    label = ''
     definition_period = MONTH
     set_input = set_input_dispatch_by_period
 
@@ -19,7 +19,7 @@ class taux_versement_transport(Variable):
         effectif_entreprise = individu('effectif_entreprise', period)
         categorie_salarie = individu('categorie_salarie', period)
 
-        seuil_effectif = parameters(period).cotsoc.versement_transport.seuil_effectif
+        seuil_effectif = parameters(period).prelevements_sociaux.autres_taxes_participations_assises_salaires.versement_transport.seuil_effectif
 
         preload_taux_versement_transport()
         public = (
@@ -45,8 +45,9 @@ class taux_versement_transport(Variable):
 class versement_transport(Variable):
     value_type = float
     entity = Individu
-    label = "Versement transport"
+    label = 'Versement transport'
     definition_period = MONTH
+    set_input = set_input_divide_by_period
 
     def formula(individu, period, parameters):
         assiette_cotisations_sociales = individu('assiette_cotisations_sociales', period)

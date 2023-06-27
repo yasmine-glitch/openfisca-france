@@ -1,0 +1,9 @@
+description: Taux et versement de l'Allocations postnatales (APN, 1975-1984)
+metadata:
+  short_label: APN
+  label_en: "Postnatal allowance (APN): Rate and payment"
+  order:
+  - taux_base_calcul_verse
+  - nombre_fractions_versement
+  - taux
+  - majoration_naissance_adoption

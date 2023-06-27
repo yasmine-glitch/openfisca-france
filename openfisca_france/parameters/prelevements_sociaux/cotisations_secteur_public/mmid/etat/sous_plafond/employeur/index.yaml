@@ -1,0 +1,6 @@
+description: Cotisations maladie spécifiques (employeur, sous plafond) de la Fonction publique d'Etatde la Fonction publique d'Etat
+metadata:
+  short_label: Employeur
+  label_en: Health insurance contributions
+  order:
+  - maladie

@@ -1,0 +1,12 @@
+description: Maximum
+values:
+  1985-01-01:
+    value: 15000
+  2001-01-01:
+    value: 2287
+  2003-01-01:
+    value: null
+metadata:
+  unit: currency
+  reference:
+    href: https://www.ipp.eu/outils/baremes-ipp/

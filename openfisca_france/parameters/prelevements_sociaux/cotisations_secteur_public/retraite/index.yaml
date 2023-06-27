@@ -1,0 +1,8 @@
+description: Cotisations retraite spécifiques à la fonction publique
+metadata:
+  short_label: Cotisations retraite
+  label_en: Contributions for pensions - central government
+  order:
+  - taux_implicite
+  - ati
+  - pension

@@ -1,4 +1,4 @@
-from openfisca_france.model.base import Individu, Variable, min_, max_, not_, MONTH
+from openfisca_france.model.base import Individu, Variable, min_, max_, not_, MONTH, set_input_dispatch_by_period, set_input_divide_by_period
 from numpy import ceil
 
 
@@ -6,6 +6,7 @@ class livret_epargne_populaire_plafond(Variable):
     value_type = float
     entity = Individu
     definition_period = MONTH
+    set_input = set_input_divide_by_period
     reference = [
         'Article L221-15 du code monétaire et financier',
         'https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=5ADBC3914320B781FBF13FBA821C392E.tplgfr25s_3?idArticle=LEGIARTI000028447486&cidTexte=LEGITEXT000006072026&dateTexte=20190515',
@@ -14,7 +15,7 @@ class livret_epargne_populaire_plafond(Variable):
         ]
 
     def formula(individu, period, parameters):
-        params = parameters(period).epargne.livret_epargne_populaire
+        params = parameters(period).taxation_capital.epargne.livret_epargne_populaire
         residence = individu.menage('residence', period)
         bareme = params.baremes[residence]
 
@@ -30,8 +31,9 @@ class livret_epargne_populaire_eligibilite(Variable):
     value_type = bool
     entity = Individu
     label = "Eligibilité au livret d'épargne populaire"
-    reference = "https://www.service-public.fr/particuliers/vosdroits/F2367"
+    reference = 'https://www.service-public.fr/particuliers/vosdroits/F2367'
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula(individu, period, parameters):
         rfr = individu.foyer_fiscal('rfr', period.n_2)
@@ -44,13 +46,21 @@ class livret_epargne_populaire_eligibilite(Variable):
 class livret_epargne_populaire_taux(Variable):
     value_type = float
     entity = Individu
-    label = "Eligibilité au livret d'épargne populaire"
+    label = "Taux du livret d'épargne populaire"
+    reference = [
+        "3° I de l'article 1 de l'arrêté du 27 janvier 2021 relatif aux taux d'intérêt des produits d'épargne réglementée",
+        'https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043114027/2022-07-31/',
+        ]
     definition_period = MONTH
+    set_input = set_input_dispatch_by_period
 
     def formula(individu, period, parameters):
         eligibilite = individu('livret_epargne_populaire_eligibilite', period)
 
-        epargne = parameters(period).epargne
+        epargne = parameters(period).taxation_capital.epargne
         base_livret_a = epargne.livret_a.taux
-        majoration = epargne.livret_epargne_populaire.majoration_base_livret_a
-        return 100 * eligibilite * (base_livret_a + majoration)
+        majoration = epargne.livret_a.majoration_base
+        taux_inflation = epargne.taux_inflation
+
+        taux_lep = max(base_livret_a + majoration, taux_inflation)
+        return eligibilite * 100 * taux_lep

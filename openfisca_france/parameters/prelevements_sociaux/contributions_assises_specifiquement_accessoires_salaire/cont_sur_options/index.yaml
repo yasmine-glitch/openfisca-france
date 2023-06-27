@@ -1,0 +1,7 @@
+description: Contributions sur options et actions attribuées gratuitement (Taxes sur les accessoires du salaire)
+metadata:
+  short_label: Options et actions
+  label_en: Contribution levied on options and shares granted for free
+  order:
+  - employeur
+  - salarie

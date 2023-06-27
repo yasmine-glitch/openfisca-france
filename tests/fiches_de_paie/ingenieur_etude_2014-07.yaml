@@ -10,7 +10,7 @@
     contrat_de_travail: temps_plein
     contrat_de_travail_debut: '2014-01-01'
     contrat_de_travail_fin: '2014-12-31'
-    contrat_de_travail_duree: cdi
+    contrat_de_travail_type: cdi
     depcom_entreprise: '75114'
     effectif_entreprise: 3000
     heures_non_remunerees_volume: 0
@@ -22,7 +22,7 @@
     prevoyance_obligatoire_cadre_taux_employeur: 59.02/3000  # 1.5% est le minimum
     primes_salaires: 0
     prise_en_charge_employeur_retraite_complementaire: 0
-    prise_en_charge_employeur_prevoyance_complementaire: 0
+    prevoyance_complementaire_employeur: 0
     prise_en_charge_employeur_retraite_supplementaire: 0
     ratio_alternants: 0.1
     redevable_taxe_apprentissage: 1
@@ -38,9 +38,9 @@
     # cotisations_employeur: 0
     remboursement_transport: 0
     ircantec_employeur: 0
-    pension_civile_employeur: 0
+    pension_employeur: 0
     rafp_employeur: 0
-    allocations_temporaires_invalidite: 0
+    ati_atiacl: 0
     accident_du_travail: -33
     famille: -157.5
     # Permière ligne 12.8 = 12.8 + 1.75 + 0.3 (maldie + vieillesse_deplaf + csa )
@@ -57,7 +57,7 @@
     agirc_gmp_employeur: -41.17
     agirc_employeur: 0
     apec_employeur: -1.08
-    arrco_employeur: -137.4
+    arrco_employeur: -137.25
     chomage_employeur: -120
     cotisation_exceptionnelle_temporaire_employeur: -6.60
     vieillesse_deplafonnee_employeur: -3000 * 0.0175  # est aggrégé avec maladie et csa
@@ -90,14 +90,13 @@
     vieillesse_deplafonnee_salarie: -3000 * 0.0025  # est agrégée avec maladie sur la fiche de paie
     vieillesse_plafonnee_salarie: -204
     ircantec_salarie: 0
-    pension_civile_salarie: 0
+    pension_salarie: 0
     rafp_salarie: 0
 
     # cotisations_salariales_non_contributives: 0
     mmid_salarie: -3000 * 0.0075  # est agrégée avec vieillesse déplaf. sur la fiche de paie
     contribution_exceptionnelle_solidarite: 0
     csg_deductible_salaire: -150.32 - 3.01
-    mhsup: 0
     salaire_net: 3000 - (722.46 - 30.82) - 0.17 # moitié de la mutuelle et erreur de 0.17 gmp
 
 

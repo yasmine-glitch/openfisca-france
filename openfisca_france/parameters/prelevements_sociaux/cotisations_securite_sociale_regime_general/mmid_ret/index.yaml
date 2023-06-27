@@ -1,5 +1,6 @@
-description:  Cotisations spéciales assurance maladie
+description: Cotisations spéciales assurance maladie
 metadata:
-  ux_name: Branche assurance maladie
-  description_en: Special SSC on pension benefits for sickness insurance
-reference: https://www.ipp.eu/outils/baremes-ipp/
+  short_label: Branche assurance maladie
+  label_en: Special SSC on pension benefits for sickness insurance
+  order:
+  - avantages_de_retraite

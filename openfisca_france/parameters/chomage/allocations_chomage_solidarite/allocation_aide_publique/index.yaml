@@ -1,0 +1,7 @@
+description: Allocation d'aide publique
+metadata:
+  short_label: Aide publique
+  label_en: Public aid allowance (1967-1979)
+  order:
+  - allocation_principale
+  - majoration_conjoint_enfant_charge

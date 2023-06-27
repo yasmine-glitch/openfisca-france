@@ -1,0 +1,106 @@
+description: Montant minimal ARE-formation de l'allocation de base d'assurance chômage
+values:
+  1968-07-22:
+    value: null
+  2002-07-01:
+    value: 17.73
+  2003-07-01:
+    value: 17.74
+  2004-07-01:
+    value: null
+  2005-07-01:
+    value: 17.92
+  2006-07-01:
+    value: 18.28
+  2007-07-01:
+    value: 18.64
+  2008-07-01:
+    value: 19.11
+  2009-07-01:
+    value: 19.3
+  2010-07-01:
+    value: 19.53
+  2011-07-01:
+    value: 19.82
+  2012-07-01:
+    value: 20.22
+  2013-07-01:
+    value: 20.34
+  2014-07-01:
+    value: 20.48
+  2015-07-01:
+    value: 20.54
+  2017-07-01:
+    value: 20.67
+  2018-07-01:
+    value: 20.81
+  2019-07-01:
+    value: 20.96
+  2020-07-01:
+    value: 21.04
+metadata:
+  short_label: Montant minimal ARE-formation
+  label_en: "UI scheme: lump-sum and minimum"
+  unit: currency
+  reference:
+    1968-07-22:
+      title: Circulaire 68-35 - décision du 25/06/1968
+    2002-07-01:
+    - title: Protocole du 27/12/2002
+    - title: Circulaire 02-15 - décision du 03/07/2002
+    2003-07-01:
+    - title: Arrêté du 17/12/2003 portant agrément de l'avenant 3 à la convention du 01/01/2004
+    - title: Circulaire 03-09 - décision du 02/07/2003
+    2004-07-01:
+    - title: Arrêté du 28/05/2004 portant agrément de la convention du 01/01/2004
+    - title: Circulaire 04-13 - décision du 25/06/2004
+    2005-07-01:
+      title: Arrêté du 23/02/2006 portant agrément de la convention du 18/01/2006
+    2006-07-01:
+      title: Circulaire 2006-13 du 21/07/2006
+    2007-07-01:
+      title: Circulaire 2007-09 du 26/06/2007
+    2008-07-01:
+      title: Circulaire 2008-04 du 01/07/2008
+    2009-07-01:
+    - title: Circulaire 2009-17 du 10/07/2009
+    - title: Circulaire 2009-16 du 09/07/2009
+    2010-07-01:
+      title: Circulaire 2010-10 du 02/07/2010
+    2011-07-01:
+      title: Circulaire 2011-28 du 01/08/2011
+    2012-07-01:
+      title: Circulaire 2012-18 du 11/07/2012
+    2013-07-01:
+      title: Circulaire 2013-11 du 01/07/2013
+    2014-07-01:
+      title: Circulaire 2014-20 du 04/07/2014
+    2015-07-01:
+      title: Circulaire 2015-14 du 01/07/2015
+    2017-07-01:
+      title: Circulaire 2017-14 du 29/06/2017
+    2018-07-01:
+      title: Circulaire 2018-14 du 16/07/2018
+    2019-07-01:
+      title: Circulaire 2019-08 du 27/06/2019
+    2020-07-01:
+      title: Circulaire 2020-09 du 01/07/2020
+  official_journal_date:
+    2003-07-01: "2003-12-27"
+    2004-07-01: "2004-05-29"
+    2005-07-01: "2006-03-02"
+  notes:
+    2004-07-01:
+    - title: Valeur inconnue de l'allocation journalière versée pendant une période de formation.
+documentation: |-
+  Notes :
+  Allocation égale au maximum entre un premier pourcentage du salaire journalier de référence, plus une partie fixe, ou un pourcentage plus élevé du salaire journalier de référence sans partie fixe
+  Montants fixes et allocation minimale réduits proportionnellement si salarié travaillait à temps partiel
+  Avant 1979
+  Salaire de référence pris seulement sur les 3 derniers mois d'activité, et divisé par 90 pour obtenir le salaire journalier de référence
+  Majoration de 15% du taux des allocations d'assurance s'applique pour les 3 premiers mois, revient donc à remplacer 35% par 40%. Après avenant de 1973, majoration de trois mois portée à 6 mois pour les 50-55 ans, 12mois pour 55-58ans, 24mois pour 58ans et plus.
+  Montant maximal en pourcentage du salaire de référence correspond au maximum des allocations d'assurance et d'aide publique cumulées
+  En 1968, montant minimum en Ancien Franc
+  En 1984: si affiliation entre 3-6 mois, montants minimum et maximum de l'alloc sont minorés de 25% et alloc = partie pptionnelle + partie fixe
+  En 1992: montant minimal après degressivité plus élevé pr plus de 52 ans, au chômage depuis plus d'un an, ayant été affilié depuis au moins 20 ans, justifiant d'une année continue ou deux années discontinues d'appartenance à une/plusieurs entreprises au cours des 5 dernières années
+  Seuil exoneration CSG/CRDS = (Smic horaire * 35)/7 approximativement

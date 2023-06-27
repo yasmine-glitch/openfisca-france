@@ -1,0 +1,8 @@
+description: Allocation parent isolé (API)
+metadata:
+  short_label: API
+  label_en: "Single parent allowance (API): General conditions"
+  order:
+  - api_cond
+  - api_m
+  - api_fl

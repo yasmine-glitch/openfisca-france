@@ -1,0 +1,9 @@
+description: Base mensuelle de calcul des allocations familiales (BMAF)
+metadata:
+  short_label: Familiales
+  label_en: Monthly basis for the computation of family allowances (BMAF)
+  order:
+  - bmaf
+  - bmaf_regimes_agricoles
+  - bmaf_e_t_i
+  - salaire_mensuel_base_dans_departement_seine

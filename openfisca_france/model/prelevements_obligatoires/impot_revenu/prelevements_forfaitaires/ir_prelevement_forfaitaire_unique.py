@@ -18,6 +18,7 @@ class assurance_vie_pfu_ir_plus6ans_avant1990(Variable):
     value_type = float
     entity = FoyerFiscal
     label = "Produits des bons ou contrats de capitalisation et d'assurance vie d'une durée d'au moins 6 ans pour les contrats souscrits avant le 1er janvier 1990, et que le bénéficiaire décide de soumettre au prélèvement forfaitaire unique au titre de l'impôt sur le revenu"
+    reference = 'https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000036377422&cidTexte=JORFTEXT000036339197'  # Art. 28 (modif art 125 A, 125-0 A, 200 A et art 117 quater du CGI)
     definition_period = YEAR
 
 
@@ -25,6 +26,7 @@ class assurance_vie_pfu_ir_moins4ans_1990_19970926(Variable):
     value_type = float
     entity = FoyerFiscal
     label = "Produits des bons ou contrats de capitalisation et d'assurance vie d'une durée de moins de 4 ans pour les contrats souscrits entre le 1er janvier 1990 et le 26 septembre 1997, et que le bénéficiaire décide de soumettre au prélèvement forfaitaire unique au titre de l'impôt sur le revenu"
+    reference = 'https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000036377422&cidTexte=JORFTEXT000036339197'  # Art. 28 (modif art 125 A, 125-0 A, 200 A et art 117 quater du CGI)
     definition_period = YEAR
 
 
@@ -39,6 +41,7 @@ class assurance_vie_pfu_ir_plus8ans_19970926_primes_avant_20170927(Variable):
     value_type = float
     entity = FoyerFiscal
     label = "Produits des bons ou contrats de capitalisation et d'assurance vie de plus de 8 ans pour les contrats souscrits après le 26 septembre 1997, dont le produits sont associés aux primes versées avant le 27 septembre 2017, et que le bénéficiaire décide de soumettre au prélèvement forfaitaire unique au titre de l'impôt sur le revenu"
+    reference = 'https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000036377422&cidTexte=JORFTEXT000036339197'  # Art. 28 (modif art 125 A, 125-0 A, 200 A et art 117 quater du CGI)
     definition_period = YEAR
 
 
@@ -53,11 +56,12 @@ class assurance_vie_pfu_ir_moins4ans_19970926_primes_avant_20170927(Variable):
     value_type = float
     entity = FoyerFiscal
     label = "Produits des bons ou contrats de capitalisation et d'assurance vie de moins de 4 ans pour les contrats souscrits après le 26 septembre 1997, dont le produits sont associés aux primes versées avant le 27 septembre 2017, et que le bénéficiaire décide de soumettre au prélèvement forfaitaire unique au titre de l'impôt sur le revenu"
+    reference = 'https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000036377422&cidTexte=JORFTEXT000036339197'  # Art. 28 (modif art 125 A, 125-0 A, 200 A et art 117 quater du CGI)
     definition_period = YEAR
 
 
 class f2zz(Variable):
-    cerfa_field = "2ZZ"
+    cerfa_field = '2ZZ'
     value_type = float
     entity = FoyerFiscal
     label = "Produits des bons ou contrats de capitalisation et d'assurance vie de moins de 8 ans pour les contrats souscrits après le 26 septembre 1997, dont le produits sont associés aux primes versées après le 27 septembre 2017, et que le bénéficiaire décide de soumettre au prélèvement forfaitaire unique au titre de l'impôt sur le revenu"
@@ -98,7 +102,7 @@ class assurance_vie_pfu_ir(Variable):
 class revenus_capitaux_prelevement_forfaitaire_unique_ir(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Revenus des valeurs et capitaux mobiliers soumis au prélèvement forfaitaire unique (partie impôt sur le revenu)"
+    label = 'Revenus des valeurs et capitaux mobiliers soumis au prélèvement forfaitaire unique (partie impôt sur le revenu)'
     definition_period = MONTH
     set_input = set_input_divide_by_period
 
@@ -122,23 +126,21 @@ class revenus_capitaux_prelevement_forfaitaire_unique_ir(Variable):
 class plus_values_prelevement_forfaitaire_unique_ir(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Plus-values soumises au prélèvement forfaitaire unique (partie impôt sur le revenu)"
+    label = 'Plus-values soumises au prélèvement forfaitaire unique (partie impôt sur le revenu)'
+    reference = 'https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000036377422/'
     definition_period = YEAR
 
     def formula_2018_01_01(foyer_fiscal, period, parameters):
-        f3sa = foyer_fiscal('f3sa', period)
+        f3sb = foyer_fiscal('f3sb', period)
         f3ua = foyer_fiscal('f3ua', period)
         f3va = foyer_fiscal('f3va', period)
         f3vg = foyer_fiscal('f3vg', period)
         f3tj = foyer_fiscal('f3tj', period)
-        rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
 
-        rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
-
-        return f3sa + max_(0, f3ua - f3va) + f3vg + f3tj + rpns_pvce
+        return f3sb + max_(0, f3ua - f3va) + f3vg + f3tj
 
     def formula_2019_01_01(foyer_fiscal, period, parameters):
-        f3sa = foyer_fiscal('f3sa', period)
+        f3sb = foyer_fiscal('f3sb', period)
         f3ua = foyer_fiscal('f3ua', period)
         f3va = foyer_fiscal('f3va', period)
         f3vg = foyer_fiscal('f3vg', period)
@@ -146,22 +148,22 @@ class plus_values_prelevement_forfaitaire_unique_ir(Variable):
         f3tk = foyer_fiscal('f3tk', period)
         f3vt = foyer_fiscal('f3vt', period)
         f3an = foyer_fiscal('f3an', period)
-        f3bn = foyer_fiscal('f3bn', period)
-        rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
 
-        rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
-
-        return f3sa + max_(0, f3ua - f3va) + f3vg + max_(0, f3tj - f3tk) + f3vt + f3an - f3bn + rpns_pvce
+        return f3sb + max_(0, f3ua - f3va) + f3vg + max_(0, f3tj - f3tk) + f3vt + f3an
 
 
 class prelevement_forfaitaire_unique_ir_hors_assurance_vie_epargne_solidaire_etats_non_cooperatifs(Variable):
     value_type = float
     entity = FoyerFiscal
     label = "Partie du prélèvement forfaitaire unique associée à l'impôt sur le revenu (hors assurance-vie, épargne solidaire et produits venant des états non-coopératifs)"
+    reference = [
+        'Article 28 de la Loi n° 2017-1837 du 30 décembre 2017 de finances pour 2018 (modifie art. 125 A, 125-0 A, 200 A et art. 117 quater du CGI)',
+        'https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000036377422&cidTexte=JORFTEXT000036339197'
+        ]
     definition_period = YEAR
 
     def formula_2018_01_01(foyer_fiscal, period, parameters):
-        P = parameters(period).impot_revenu.prelevement_forfaitaire_unique_ir
+        P = parameters(period).taxation_capital.prelevement_forfaitaire.partir_2018
 
         # Revenus des valeurs et capitaux mobiliers hors assurance-vie et hors produits d'épargne solidaire ou des états non-coopératifs
         #   Note : Les revenus d'assurance-vie, de l'épargne solidaire et des produits des états non-coopératifs ont été ajoutés dans les variables f2ee et f2dh (cf. docstring de ces varables pour une explication), d'où le fait qu'on soustrait ici ces variables de revenus_capitaux_prelevement_forfaitaire_unique_ir
@@ -193,7 +195,7 @@ class prelevement_forfaitaire_unique_ir_hors_assurance_vie_epargne_solidaire_eta
             + plus_values_prelevement_forfaitaire_unique_ir
             )
 
-        return -assiette_pfu_hors_assurance_vie * P.taux
+        return -assiette_pfu_hors_assurance_vie * P.taux_prelevement_forfaitaire_rev_capital_eligibles_pfu_interets_dividendes_etc
 
 
 class prelevement_forfaitaire_unique_ir_sur_assurance_vie(Variable):
@@ -203,8 +205,9 @@ class prelevement_forfaitaire_unique_ir_sur_assurance_vie(Variable):
     definition_period = YEAR
 
     def formula_2018_01_01(foyer_fiscal, period, parameters):
-        P1 = parameters(period).impot_revenu.prelevement_forfaitaire_unique_ir
-        P2 = parameters(period).impot_revenu.rvcm
+        P1_taux = parameters(period).taxation_capital.prelevement_forfaitaire.partir_2018.taux_prelevement_forfaitaire_rev_capital_eligibles_pfu_interets_dividendes_etc
+        P1_taux_reduit_av = parameters(period).taxation_capital.prelevement_forfaitaire.partir_2018.taux_prelevement_produits_assurance_vie_non_eligibles_prelevement_forfaitaire_unique
+        P2 = parameters(period).impot_revenu.calcul_revenus_imposables.rvcm
 
         maries_ou_pacses = foyer_fiscal('maries_ou_pacses', period)
         f2ch = foyer_fiscal('f2ch', period)
@@ -212,12 +215,12 @@ class prelevement_forfaitaire_unique_ir_sur_assurance_vie(Variable):
         f2vv = foyer_fiscal('f2vv', period)
         f2ww = foyer_fiscal('f2ww', period)
 
-        abattement_residuel = max_(P2.abat_assvie * (1 + maries_ou_pacses) - f2ch, 0)
+        abattement_residuel = max_(P2.produits_assurances_vies_assimiles.abattement * (1 + maries_ou_pacses) - f2ch, 0)
         abattement_residuel2 = max_(abattement_residuel - f2vv, 0)
         pfu_ir_sur_assurance_vie = -(
-            (f2zz * P1.taux)
-            + (max_(f2vv - abattement_residuel, 0) * P1.taux_reduit_av)
-            + (max_(f2ww - abattement_residuel2, 0) * P1.taux)
+            (f2zz * P1_taux)
+            + (max_(f2vv - abattement_residuel, 0) * P1_taux_reduit_av)
+            + (max_(f2ww - abattement_residuel2, 0) * P1_taux)
             )
 
         return pfu_ir_sur_assurance_vie

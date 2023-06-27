@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 class csg(Variable):
     value_type = float
     entity = Individu
-    label = "Contribution sociale généralisée"
+    label = 'Contribution sociale généralisée'
     definition_period = YEAR
 
     def formula(individu, period):
@@ -17,7 +17,8 @@ class csg(Variable):
         csg_deductible_chomage = individu('csg_deductible_chomage', period, options = [ADD])
         csg_imposable_retraite = individu('csg_imposable_retraite', period, options = [ADD])
         csg_deductible_retraite = individu('csg_deductible_retraite', period, options = [ADD])
-        csg_non_salarie = individu('csg_non_salarie', period, options = [ADD])
+        csg_imposable_non_salarie = individu('csg_imposable_non_salarie', period, options = [ADD])
+        csg_deductible_non_salarie = individu('csg_deductible_non_salarie', period, options = [ADD])
         # CSG sur revenus du capital, définie à l'échelle du foyer fiscal, mais projetée sur le déclarant principal
         csg_revenus_capital = individu.foyer_fiscal('csg_revenus_capital', period)
         csg_revenus_capital_projetee = csg_revenus_capital * individu.has_role(FoyerFiscal.DECLARANT_PRINCIPAL)
@@ -29,15 +30,22 @@ class csg(Variable):
             + csg_deductible_chomage
             + csg_imposable_retraite
             + csg_deductible_retraite
-            + csg_non_salarie
+            + csg_imposable_non_salarie
+            + csg_deductible_non_salarie
             + csg_revenus_capital_projetee
             )
+
+    # TODO: manque CSG sur IJ et pré-retraites
 
 
 class crds(Variable):
     value_type = float
     entity = Individu
-    label = "Contributions au remboursement de la dette sociale"
+    label = 'Contributions au remboursement de la dette sociale'
+    reference = [
+        'Ordonnance n° 96-50 du 24 janvier 1996 relative au remboursement de la dette sociale, art. 14',
+        'https://www.legifrance.gouv.fr/loda/id/LEGISCTA000006106400'
+        ]
     definition_period = YEAR
 
     def formula(individu, period):
@@ -56,13 +64,14 @@ class crds(Variable):
         # CRDS sur revenus du capital, définie à l'échelle du foyer fiscal, mais projetée sur le déclarant principal
         crds_revenus_capital = individu.foyer_fiscal('crds_revenus_capital', period)
         crds_revenus_capital_projetee = crds_revenus_capital * individu.has_role(FoyerFiscal.DECLARANT_PRINCIPAL)
+
         return crds_individu + crds_famille_projetes + crds_revenus_capital_projetee
 
 
 class crds_hors_prestations(Variable):
     value_type = float
     entity = Individu
-    label = "Contributions au remboursement de la dette sociale (hors celles portant sur les prestations sociales)"
+    label = 'Contributions au remboursement de la dette sociale (hors celles portant sur les prestations sociales)'
     definition_period = YEAR
 
     def formula(individu, period):

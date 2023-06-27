@@ -1,0 +1,8 @@
+description: Conditions et montants de l'Allocation d'éducation spéciale (AES, 1976-2005)
+metadata:
+  short_label: AES
+  label_en: "Special education allowance (AES): Conditions and amounts"
+  order:
+  - age_maximum_enfant
+  - base
+  - complement_allocation

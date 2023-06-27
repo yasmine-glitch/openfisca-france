@@ -1,0 +1,9 @@
+description: Prestations sociales - Minima sociaux
+metadata:
+  short_label: Minima sociaux
+  label_en: Minimum incomes
+  order:
+  - rmi
+  - api
+  - rsa
+  - ppa

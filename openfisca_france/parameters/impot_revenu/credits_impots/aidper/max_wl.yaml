@@ -1,0 +1,6 @@
+description: Plafond unique dépenses de diagnostic préalables aux travaux dans le cadre d'un PRTT
+values:
+  2015-01-01:
+    value: 20000
+metadata:
+  unit: currency

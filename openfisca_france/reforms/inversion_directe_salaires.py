@@ -18,9 +18,9 @@ class salaire_de_base(Variable):
     definition_period = MONTH
 
     def formula(individu, period, parameters):
-        """Calcule le salaire brut à partir du salaire imposable par inversion du barème
+        '''Calcule le salaire brut à partir du salaire imposable par inversion du barème
         de cotisations sociales correspondant à la catégorie à laquelle appartient le salarié.
-        """
+        '''
         # Get value for year and divide below.
         salaire_imposable_pour_inversion = individu('salaire_imposable_pour_inversion',
             period.start.offset('first-of', 'year').period('year'))
@@ -34,22 +34,10 @@ class salaire_de_base(Variable):
         P = parameters(period)
 
         salarie = P.cotsoc.cotisations_salarie
-        plafond_securite_sociale_annuel = P.cotsoc.gen.plafond_securite_sociale * 12
+        plafond_securite_sociale_annuel = P.prelevements_sociaux.pss.plafond_securite_sociale_annuel
         taux_csg = parameters(period).prelevements_sociaux.contributions_sociales.csg.activite.deductible.taux * (1 - .0175)
         csg = MarginalRateTaxScale(name = 'csg')
         csg.add_bracket(0, taux_csg)
-
-#            cat = None
-#            if (categorie_salarie == 0).all():
-#                cat = 'prive_non_cadre'
-#            elif (categorie_salarie == 1).all():
-#                cat = 'prive_cadre'
-#            elif (categorie_salarie == 2).all():
-#                cat = 'public_titulaire_etat'
-#            if cat is not None:
-#                for name, bareme in salarie[cat].items():
-#                    print name, bareme
-
         prive_non_cadre = salarie['prive_non_cadre'].combine_tax_scales().scale_tax_scales(
             plafond_securite_sociale_annuel)
         prive_cadre = salarie['prive_cadre'].combine_tax_scales().scale_tax_scales(plafond_securite_sociale_annuel)
@@ -71,8 +59,8 @@ class traitement_indiciaire_brut(Variable):
     definition_period = MONTH
 
     def formula(individu, period, parameters):
-        """Calcule le tratement indiciaire brut à partir du salaire imposable.
-        """
+        '''Calcule le tratement indiciaire brut à partir du salaire imposable.
+        '''
         # Get value for year and divide below.
         salaire_imposable_pour_inversion = individu('salaire_imposable_pour_inversion',
             period.start.offset('first-of', 'year').period('year'))
@@ -116,9 +104,9 @@ class traitement_indiciaire_brut(Variable):
         # Pour a fonction publique la csg est calculée sur l'ensemble salbrut(=TIB) + primes
         # Imposable = TIB - csg( (1+taux_prime)*TIB ) - pension(TIB) + taux_prime*TIB
         bareme_csg_public_titulaire_etat = csg.multiply_rates(
-            1 + TAUX_DE_PRIME, inplace = False, new_name = "csg deduc titutaire etat")
+            1 + TAUX_DE_PRIME, inplace = False, new_name = 'csg deduc titutaire etat')
         public_titulaire_etat.add_tax_scale(bareme_csg_public_titulaire_etat)
-        bareme_prime = MarginalRateTaxScale(name = "taux de prime")
+        bareme_prime = MarginalRateTaxScale(name = 'taux de prime')
         bareme_prime.add_bracket(0, -TAUX_DE_PRIME)  # barème équivalent à taux_prime*TIB
         public_titulaire_etat.add_tax_scale(bareme_prime)
 
@@ -137,8 +125,8 @@ class primes_fonction_publique(Variable):
     definition_period = MONTH
 
     def formula(individu, period, parameters):
-        """Calcule les primes.
-        """
+        '''Calcule les primes.
+        '''
         # Get value for year and divide below.
         traitement_indiciaire_brut = individu('traitement_indiciaire_brut',
             period.start.offset('first-of', 'year').period('year'))

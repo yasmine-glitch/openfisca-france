@@ -1,0 +1,35 @@
+values:
+  2015-11-01:
+    value: 4.2
+  2017-04-01:
+    value: 5.4
+  2018-06-02:
+    value: 7.4
+metadata:
+  short_label: Supplément si non-hébergé
+  last_value_still_valid_on: "2022-01-10"
+  label_en: "Asylum-seeker allowance (ADA): Amounts"
+  unit: currency
+  reference:
+    title: Supplément si non-hébergé dans centres d'accueil ou hébergement d'urgence de l'Allocation pour demandeur d'asile (ADA)
+  official_journal_date:
+    2015-11-01: "2015-10-23"
+    2017-04-01: "2017-03-30"
+    2018-06-02: "2018-06-01"
+  notes:
+    2017-04-01:
+    - title: Décision du Conseil d'Etat du 23/12/2016 d'annuler partiellement le montant de l'ADA (concernant le supplément si non-hébergé qui est insuffisant) et enjoint au Premier Ministre de fixer un nouveau montant
+    2018-06-02:
+    - title: Décision du Conseil d'Etat du 23/12/2016 d'annuler partiellement le montant de l'ADA (concernant le supplément si non-hébergé qui est insuffisant) et enjoint au Premier Ministre de fixer un nouveau montant
+documentation: |-
+  Loi du 29/07/2015, art. 23
+  2015-07-30
+  Créé l'allocation pour demandeur d'asile (ADA). Remplace l'allocation temporaire d'attente (ATA) versée par Pôle Emploi, et l'allocation mensuelle de subsistance (AMS).
+  Notes :
+  L'ADA est gérée par l'Office français de l'immigration et de l'intégration (OFII).
+  "Son montant est révisé, le cas échéant, une fois par an, en fonction de l'évolution des prix, hors tabac, prévue dans le rapport économique, social et financier annexé au projet de loi de finances de l'année."
+  "Un décret définit le barème de l'allocation pour demandeur d'asile, en prenant en compte les ressources de l'intéressé, son mode d'hébergement et, le cas échéant, les prestations offertes par son lieu d'hébergement.
+   Le barème de l'allocation pour demandeur d'asile prend en compte le nombre d'adultes et d'enfants composant la famille du demandeur d'asile et accompagnant celui-ci."
+  Sources :
+  Code de l'entrée et du séjour des étrangers et du droit d'asile (CESEDA), titre IV, chapitre IV, Section 4.
+  CESEDA, Annexe 7.1

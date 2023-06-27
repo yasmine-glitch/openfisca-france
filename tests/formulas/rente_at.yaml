@@ -18,7 +18,7 @@
         personne_de_reference:
         - parent1
   output:
-    indemnite_accident_travail: 2966.40
+    indemnite_accident_travail: 2986.45
 
 - name: "Cas 2: Victime salariée, 10% < taux d'IPP < 50%, versement d'une rente trimestrielle"
   period: 2018-07
@@ -111,7 +111,7 @@
         - parent1
   output:
     rente_accident_travail: 1216.67
-    pcrtp: 559.26
+    pcrtp: 541.22
 
 - name: "Cas 6: Victime non salariée agricole, taux d'IPP < 30%, pas de rente ou d'indemnité"
   period: 2018-07
@@ -122,7 +122,7 @@
     individus:
       parent1:
         taux_accident_travail: 0.29
-        tns_benefice_exploitant_agricole:
+        rpns_benefice_exploitant_agricole:
           2017: 20000
     foyers_fiscaux:
       foyer_fiscal_0:
@@ -144,7 +144,7 @@
     individus:
       parent1:
         taux_accident_travail: 0.32
-        tns_benefice_exploitant_agricole:
+        rpns_benefice_exploitant_agricole:
           2017: 20000
     foyers_fiscaux:
       foyer_fiscal_0:
@@ -166,7 +166,7 @@
     individus:
       parent1:
         taux_accident_travail: 0.7
-        tns_benefice_exploitant_agricole:
+        rpns_benefice_exploitant_agricole:
           2017: 20000
     foyers_fiscaux:
       foyer_fiscal_0:
@@ -189,7 +189,7 @@
       parent1:
         age_en_mois: 1224
         taux_accident_travail: 0.90
-        tns_benefice_exploitant_agricole:
+        rpns_benefice_exploitant_agricole:
           2017: 20000
         pcrtp_nombre_actes_assistance: 5
     foyers_fiscaux:
@@ -202,4 +202,4 @@
         - parent1
   output:
     rente_accident_travail: 1416.67
-    pcrtp: 1118.54
+    pcrtp: 1082.43

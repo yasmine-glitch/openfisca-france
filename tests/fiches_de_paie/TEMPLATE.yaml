@@ -7,7 +7,7 @@ input:
   contrat_de_travail: temps_plein
   contrat_de_travail_debut: '2014-01-01'
   contrat_de_travail_fin: '2014-12-31'
-  contrat_de_travail_duree: cdi
+  contrat_de_travail_type: cdi
   effectif_entreprise: 0
   heures_non_remunerees_volume: 0
   heures_remunerees_volume: 0
@@ -21,7 +21,7 @@ input:
   prevoyance_obligatoire_cadre_taux_employeur: 0.015  # 1.5% est le minimum
   primes_salaires: 0
   prise_en_charge_employeur_retraite_complementaire: 0
-  prise_en_charge_employeur_prevoyance_complementaire: 0
+  prevoyance_complementaire_employeur: 0
   prise_en_charge_employeur_retraite_supplementaire: 0
   ratio_alternants: 0
   redevable_taxe_apprentissage: 0
@@ -54,11 +54,11 @@ output:
   vieillesse_plafonnee_employeur: 0
   fonds_emploi_hospitalier: 0
   ircantec_employeur: 0
-  pension_civile_employeur: 0
+  pension_employeur: 0
   rafp_employeur: 0
 
   # cotisations_employeur_non_contributives: 0
-  allocations_temporaires_invalidite: 0
+  ati_atiacl: 0
   accident_du_travail: 0
   famille: 0
   mmid_employeur: 0
@@ -95,14 +95,13 @@ output:
   vieillesse_deplafonnee_salarie: 0
   vieillesse_plafonnee_salarie: 0
   ircantec_salarie: 0
-  pension_civile_salarie: 0
+  pension_salarie: 0
   rafp_salarie: 0
 
   # cotisations_salariales_non_contributives: 0
   mmid_salarie: 0
   contribution_exceptionnelle_solidarite: 0
   csg_deductible_salaire: 0
-  mhsup: 0
   salaire_net: 0
 
   # salaire imposable

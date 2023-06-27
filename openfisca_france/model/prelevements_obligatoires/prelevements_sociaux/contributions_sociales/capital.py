@@ -14,50 +14,50 @@ log = logging.getLogger(__name__)
 
 
 class interets_plan_epargne_logement_moins_de_12_ans_ouvert_avant_2018(Variable):
-    """
+    '''
     NB :
     (1) Cette variable est définie indépendemment de epargne_revenus_non_imposables
     (2) Les intérêts des PEL de plus de 12 ans sont imposables à l'impôt sur le revenu, et donc déjà présents dans les cases 2TR ou 2FA (attention: formulaire IR 2019 sur revenus 2018 non connu au moment de coder cette variable)
-    """
+    '''
     value_type = float
     entity = Individu
-    label = "Intérêts des plans épargne logement (PEL) de moins de 12 ans ouverts avant le 1er janvier 2018"
+    label = 'Intérêts des plans épargne logement (PEL) de moins de 12 ans ouverts avant le 1er janvier 2018'
     definition_period = YEAR
 
 
 class interets_plan_epargne_logement_moins_de_12_ans_ouvert_a_partir_de_2018(Variable):
-    """
+    '''
     NB :
     (1) Cette variable est définie indépendemment de epargne_revenus_non_imposables
     (2) Les intérêts des PEL de plus de 12 ans sont imposables à l'impôt sur le revenu, et donc déjà présents dans les cases 2TR ou 2FA (attention: formulaire IR 2019 sur revenus 2018 non connu au moment de coder cette variable)
-    """
+    '''
     value_type = float
     entity = Individu
-    label = "Intérêts des plans épargne logement (PEL) de moins de 12 ans ouverts à partir du 1er janvier 2018"
+    label = 'Intérêts des plans épargne logement (PEL) de moins de 12 ans ouverts à partir du 1er janvier 2018'
     definition_period = YEAR
 
 
 class interets_compte_epargne_logement_ouvert_avant_2018(Variable):
-    """ NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables """
+    ''' NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables '''
     value_type = float
     entity = Individu
-    label = "Intérêts des comptes épargne logement (CEL) ouverts avant le 1er janvier 2018"
+    label = 'Intérêts des comptes épargne logement (CEL) ouverts avant le 1er janvier 2018'
     definition_period = YEAR
 
 
 class interets_compte_epargne_logement_ouvert_a_partir_de_2018(Variable):
-    """ NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables """
+    ''' NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables '''
     value_type = float
     entity = Individu
-    label = "Intérêts des comptes épargne logement (CEL) ouverts à partir du 1er janvier 2018"
+    label = 'Intérêts des comptes épargne logement (CEL) ouverts à partir du 1er janvier 2018'
     definition_period = YEAR
 
 
 class interets_pel_moins_12_ans_cel(Variable):
-    """ NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables """
+    ''' NB : Cette variable est définie indépendemment de epargne_revenus_non_imposables '''
     value_type = float
     entity = Individu
-    label = "Intérêts des plans épargne logement (PEL) de moins de 12 ans et des comptes épargne logement (CEL)"
+    label = 'Intérêts des plans épargne logement (PEL) de moins de 12 ans et des comptes épargne logement (CEL)'
     definition_period = YEAR
 
     def formula(individu, period):
@@ -97,7 +97,7 @@ class assurance_vie_ps_exoneree_irpp_pl(Variable):
 class assiette_csg_plus_values(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Assiette des plus-values soumis à la CSG"
+    label = 'Assiette des plus-values soumis à la CSG'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period):
@@ -144,11 +144,14 @@ class assiette_csg_plus_values(Variable):
         f3sl = foyer_fiscal('f3sl', period)
         f3va_2014 = foyer_fiscal('f3va_2014', period)
         f3we = foyer_fiscal('f3we', period)
+        f3vt = foyer_fiscal('f3vt', period)
+        rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
+        rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
 
         # Plus-values immobilières
         f3vz = foyer_fiscal('f3vz', period)
 
-        return f3vg + f3sg + f3sl + f3va_2014 + f3vz + f3we
+        return f3vg + f3sg + f3sl + f3va_2014 + f3vz + f3we + f3vt + rpns_pvce
 
     def formula_2015_01_01(foyer_fiscal, period, parameters):
         '''
@@ -162,11 +165,14 @@ class assiette_csg_plus_values(Variable):
         f3va_2016_i = foyer_fiscal.members('f3va_2016', period)
         f3va_2016 = foyer_fiscal.sum(f3va_2016_i)
         f3we = foyer_fiscal('f3we', period)
+        f3vt = foyer_fiscal('f3vt', period)
+        rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
+        rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
 
         # Plus-values immobilières
         f3vz = foyer_fiscal('f3vz', period)
 
-        return f3vg + f3sg + f3sl + f3va_2016 + f3vz + f3we
+        return f3vg + f3sg + f3sl + f3va_2016 + f3vz + f3we + f3vt + rpns_pvce
 
     def formula_2017_01_01(foyer_fiscal, period, parameters):
         '''
@@ -180,11 +186,15 @@ class assiette_csg_plus_values(Variable):
         f3va = foyer_fiscal('f3va', period)
         f3we = foyer_fiscal('f3we', period)
         f3ua = foyer_fiscal('f3ua', period)
+        f3vt = foyer_fiscal('f3vt', period)
+        f3pi = foyer_fiscal('f3pi', period)
+        rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
+        rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
 
         # Plus-values immobilières
         f3vz = foyer_fiscal('f3vz', period)
 
-        return f3vg + f3sg + f3sl + f3va + f3ua + f3vz + f3we
+        return f3vg + f3sg + f3sl + f3va + f3ua + f3vz + f3we + f3vt + f3pi + rpns_pvce
 
     def formula_2018_01_01(foyer_fiscal, period, parameters):
 
@@ -234,7 +244,6 @@ class assiette_csg_plus_values(Variable):
         rpns_pvce_i = foyer_fiscal.members('rpns_pvce', period)
         f3pi = foyer_fiscal('f3pi', period)
         f3an = foyer_fiscal('f3an', period)
-        f3bn = foyer_fiscal('f3bn', period)
 
         rpns_pvce = foyer_fiscal.sum(rpns_pvce_i)
         f3vd = foyer_fiscal.sum(f3vd_i)
@@ -244,13 +253,13 @@ class assiette_csg_plus_values(Variable):
         # Plus-values immobilières
         f3vz = foyer_fiscal('f3vz', period)
 
-        return f3vg + f3ua + f3vz + f3we + rpns_pvce + f3sj + f3sk + f3vm + f3vt + f3wi + f3wj + f3pi + f3tj + f3an - f3bn + f3vd + f3vi + f3vf
+        return f3vg + f3ua + f3vz + f3we + rpns_pvce + f3sj + f3sk + f3vm + f3vt + f3wi + f3wj + f3pi + f3tj + f3an + f3vd + f3vi + f3vf
 
 
 class assiette_csg_revenus_capital(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Assiette des revenus du capital soumis à la CSG"
+    label = 'Assiette des revenus du capital soumis à la CSG'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):
@@ -313,7 +322,7 @@ class assiette_csg_revenus_capital(Variable):
 class csg_revenus_capital(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "CSG sur les revenus du capital"
+    label = 'CSG sur les revenus du capital'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):
@@ -327,75 +336,71 @@ class csg_revenus_capital(Variable):
         # Pour les revenus du patrimoine, le changement de CSG se fait à partir des revenus de 2017,
         # mais le taux de CSG déductible se fait à partir des revenus 2018. Pour les revenus de placement le timing est différent,
         # et reste à être pris en compte ici : cf. II.B de l'art. 67 de loi 2017-1837 et 3° et 4° du V.A de l'art. 8 de loi 2017-1836
-        return -assiette_csg_revenus_capital * csg.revenus_du_patrimoine
+        return -assiette_csg_revenus_capital * csg.taux_global.produits_de_placement
 
 
 class crds_revenus_capital(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "CRDS sur les revenus du capital"
+    label = 'CRDS sur les revenus du capital'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):
-        '''
-        Attention : Pour les années avant 2013, cette formule n'est pas entièrement correcte car le taux de la CSG n'était pas unique (distinction revenus du patrimoine et revenus de placement)
-        '''
         assiette_csg_revenus_capital = foyer_fiscal('assiette_csg_revenus_capital', period)
         P = parameters(period).taxation_capital.prelevements_sociaux
 
-        return -assiette_csg_revenus_capital * P.crds.revenus_du_patrimoine
+        return -assiette_csg_revenus_capital * P.crds.produits_de_placement
 
 
 class prelevements_sociaux_revenus_capital_hors_csg_crds(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Prélèvements sociaux (hors CSG et CRDS) sur les revenus du capital"
-    reference = "https://www.service-public.fr/particuliers/vosdroits/F2329"
+    label = 'Prélèvements sociaux (hors CSG et CRDS) sur les revenus du capital'
+    reference = 'https://www.service-public.fr/particuliers/vosdroits/F2329'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):
-        '''
-        Attention : Pour les années avant 2013, cette formule n'est pas entièrement correcte car le taux de la CSG n'était pas unique (distinction revenus du patrimoine et revenus de placement)
-        '''
         assiette_csg_revenus_capital = foyer_fiscal('assiette_csg_revenus_capital', period)
         P = parameters(period).taxation_capital.prelevements_sociaux
 
         total = (
-            P.prelevement_social.revenus_du_patrimoine
-            + P.caps.revenus_du_patrimoine
-            + P.prelevements_solidarite.revenus_du_patrimoine
+            P.prelevement_social.produits_de_placement
+            + P.caps.produits_de_placement
+            + P.prelevements_solidarite.produits_de_placement
             )
 
         return -assiette_csg_revenus_capital * total
 
     def formula_2009_01_01(foyer_fiscal, period, parameters):
-        '''
-        Attention : Pour les années avant 2013, cette formule n'est pas entièrement correcte car le taux de la CSG n'était pas unique (distinction revenus du patrimoine et revenus de placement)
-        '''
         assiette_csg_revenus_capital = foyer_fiscal('assiette_csg_revenus_capital', period)
         P = parameters(period).taxation_capital.prelevements_sociaux
 
         total = (
-            P.prelevement_social.revenus_du_patrimoine
-            + P.caps.revenus_du_patrimoine
-            + P.prelevements_solidarite.revenus_du_patrimoine
+            P.prelevement_social.produits_de_placement
+            + P.caps.produits_de_placement
+            + P.prelevements_solidarite.produits_de_placement
             + P.caps.rsa
             )
 
         return -assiette_csg_revenus_capital * total
 
     def formula_2013_01_01(foyer_fiscal, period, parameters):
-        '''
-        Attention : Pour les années avant 2013, cette formule n'est pas entièrement correcte car le taux de la CSG n'était pas unique (distinction revenus du patrimoine et revenus de placement)
-        '''
         assiette_csg_revenus_capital = foyer_fiscal('assiette_csg_revenus_capital', period)
         P = parameters(period).taxation_capital.prelevements_sociaux
 
         total = (
-            P.prelevement_social.revenus_du_patrimoine
-            + P.caps.revenus_du_patrimoine
-            + P.prelevements_solidarite.revenus_du_patrimoine
+            P.prelevement_social.produits_de_placement
+            + P.caps.produits_de_placement
+            + P.prelevements_solidarite.produits_de_placement
             )
+
+        return -assiette_csg_revenus_capital * total
+
+    def formula_2019_01_01(foyer_fiscal, period, parameters):
+        assiette_csg_revenus_capital = foyer_fiscal('assiette_csg_revenus_capital', period)
+        P = parameters(period).taxation_capital.prelevements_sociaux
+
+        total = P.prelevements_solidarite.produits_de_placement
 
         return -assiette_csg_revenus_capital * total
 
@@ -403,8 +408,8 @@ class prelevements_sociaux_revenus_capital_hors_csg_crds(Variable):
 class prelevements_sociaux_revenus_capital(Variable):
     value_type = float
     entity = FoyerFiscal
-    label = "Prélèvements sociaux sur les revenus du capital"
-    reference = "https://www.service-public.fr/particuliers/vosdroits/F2329"
+    label = 'Prélèvements sociaux sur les revenus du capital'
+    reference = 'https://www.service-public.fr/particuliers/vosdroits/F2329'
     definition_period = YEAR
 
     def formula(foyer_fiscal, period, parameters):

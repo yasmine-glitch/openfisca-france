@@ -1,0 +1,9 @@
+description: Taux effectifs (salariés/employeurs) des cotisations retraites des non-cadres (ARRCO) aux régimes complémentaires de retraite (secteur privé)
+metadata:
+  short_label: Taux effectifs (salariés/employeurs) (ARRCO)
+  label_en: Pension contributions for non-executives (ARRCO)
+  order:
+  - taux_appel
+  - taux_contractuels
+  - taux_effectifs
+  - taux_effectifs_salaries_employeurs
