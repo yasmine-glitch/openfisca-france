@@ -1,5 +1,17 @@
 # Changelog
 
+### 149.4.2 [#2132](https://github.com/openfisca/openfisca-france/pull/2132)
+
+* Changement mineur.
+* Périodes concernées : toutes.
+* Zones impactées :
+    - `model/prestations/jeunes/contrat_engagement_jeune.py`.
+    - 'tests/formulas/contrat_engagement_jeune.yaml`
+* Détails :
+
+Dans le cas de données d'entrée exprimant les revenus avec un RNI sur une période annuelle, le RNI était équivalent à 0 peut importe le montant.
+Le calcul se fait sur une période annuelle mais là formule actuelle effectue le calcule avec une période mensuelle (un offset de 12 mois).
+
 ### 149.4.1 [#2126](https://github.com/openfisca/openfisca-france/pull/2126)
 
 * Changement mineur.
@@ -64,6 +76,7 @@
   - Correction des noms à l'intérieur d'un champ "order"
   - Renommage d'un fichier .yml en .yaml
   - Nettoyage automatique de l'ensemble des paramètres
+
 
 ### 149.1.2 [#2135](https://github.com/openfisca/openfisca-france/pull/2135)
 
@@ -149,7 +162,7 @@
 * Détails :
   - Nettoyage et harmonisation avec les barèmes IPP
 
-## 147.2.1 [#2097](https://github.com/openfisca/openfisca-france/pull/2097)
+### 147.2.1 [#2097](https://github.com/openfisca/openfisca-france/pull/2097)
 
 * Évolution du système socio-fiscal.
 * Périodes concernées : à partir du 01/01/2023.
@@ -182,7 +195,7 @@
   - Documente le gel des plafonds de ressources de la réduction de loyer de solidarité
   - Renomme certains paramètres dans leur description/short_name
 
-## 147.0.1 [#2102](https://github.com/openfisca/openfisca-france/pull/2102)
+### 147.0.1 [#2102](https://github.com/openfisca/openfisca-france/pull/2102)
 
 * Amélioration technique.
 * Périodes concernées : toutes.
