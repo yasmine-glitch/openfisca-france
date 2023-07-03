@@ -1,5 +1,26 @@
- # Changelog
+# Changelog
 
+### 149.1.3 [#2137](https://github.com/openfisca/openfisca-france/pull/2137)
+
+* Changement mineur.
+* Périodes concernées : toutes.
+* Zones impactées : `parameters`.
+* Détails :
+  - Renommage de l'unité SMIC en smic.
+  - Correction des noms à l'intérieur d'un champ "order"
+  - Renommage d'un fichier .yml en .yaml
+  - Nettoyage automatique de l'ensemble des paramètres
+
+### 149.1.2 [#2135](https://github.com/openfisca/openfisca-france/pull/2135)
+
+* Correction d'un crash.
+* Périodes concernées : toutes.
+* Zones impactées : `model/prestations/enseignement_superieur/aide_merite.py`.
+* Détails :
+  - En lançant les tests avec la version `40.1.0` d'`openfisca-core`, openfisca **crash** sur la syntaxe :
+  ```python
+  Instant((period.this_year.offset(-1), 9, 1))
+  ```
 ### 149.1.1 [#2123](https://github.com/openfisca/openfisca-france/pull/2123)
 
 * Changement mineur : Ces changements modifient des éléments non fonctionnels de ce dépôt.
@@ -7,8 +28,7 @@
 * Zones impactées : paramètres dont l'unité est le smic
 * Détails : Implémente des unités plus précises du SMIC
 
-
-### 149.1.0 [#2118](https://github.com/openfisca/openfisca-france/pull/2118)
+## 149.1.0 [#2118](https://github.com/openfisca/openfisca-france/pull/2118)
 
 * Amélioration technique.
 * Périodes concernées : à partir du 01/04/2014
